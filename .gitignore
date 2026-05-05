@@ -1,0 +1,24 @@
+# Local Codex/user configuration backups
+config.toml.bak
+*.local.toml
+
+# Local collection helpers and generated manifests
+collect_csdn_ui_series.py
+series_manifest.json
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.python-version
+.venv/
+venv/
+
+# Tool and editor noise
+.idea/
+.vscode/
+*.swp
+*.tmp
+
+# OS files
+Thumbs.db
+.DS_Store

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ImGui Reverse"
+  short_description: "ImGui reverse overlay setup and hook workflows."
+  default_prompt: "Use $imgui-reverse to plan or implement an ImGui reverse overlay workflow on Windows."

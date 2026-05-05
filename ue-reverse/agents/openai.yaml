@@ -1,0 +1,4 @@
+interface:
+  display_name: "UE Reverse"
+  short_description: "UE reverse analysis, object access, and ESP workflows."
+  default_prompt: "Use $ue-reverse to analyze or implement a UE4 or UE5 reverse-engineering workflow."
