@@ -1,6 +1,6 @@
 ---
 name: ue-reverse
-description: Summarize and apply Unreal Engine reverse-engineering workflows from setup through runtime object access and overlay drawing. Use when the task involves UE or UE4/UE5 reverse analysis, engine source preparation, GName or FName reconstruction, UObject or FUObjectArray traversal, UWorld lookup, actor enumeration, world-to-screen conversion, object-name rendering, enemy filtering, bone access, or skeleton ESP drawing.
+description: Summarize and apply Unreal Engine reverse-engineering workflows from setup through runtime object access and overlay drawing. Use when the task involves UE or UE4/UE5 reverse analysis, engine source preparation, GName or FName reconstruction, encrypted GName or FNamePool recovery, NamePool block decryption, UObject or FUObjectArray traversal, UWorld lookup, actor enumeration, world-to-screen conversion, object-name rendering, enemy filtering, bone access, or skeleton ESP drawing.
 ---
 
 # UE Reverse
@@ -11,20 +11,22 @@ Use this skill to map the UE article series into a repeatable reverse-engineerin
 
 1. Classify the request into one of seven stages: setup, name-system recovery, object-system recovery, visual feature building, asset-unpack / pak-decrypt analysis, IoStore / loader analysis, or reflection codegen / metadata-pipeline analysis.
 2. Read only the matching article band in [references/series.md](references/series.md).
-3. Read [references/kanxue-notes.md](references/kanxue-notes.md) when the user needs extra conceptual framing around reflection design, `FName` / `NamePool`, `GUObjectArray`, `GWorld`, `PersistentLevel`, actor hierarchy, dump-tool usage, or world-to-screen math from the public preview content of the Kanxue threads.
-4. Read [references/cnblogs-notes.md](references/cnblogs-notes.md) when the task is specifically about recovering the UE5 global trio `GWorld`, `GName`, and `GUObjectArray`, or when the user needs concrete locator strings and example dumper commands.
-5. Read [references/asset-unpack-notes.md](references/asset-unpack-notes.md) when the task involves Pak extraction, AES-key recovery, CUE4Parse repair, UnrealPak workflows, custom loader tracing, or non-standard UE asset encryption.
-6. Read [references/mod-pipeline-notes.md](references/mod-pipeline-notes.md) when the task involves `Mappings.usmap`, FModel export, DCC editing, UE5 repack, `UE4SS`, or a full asset-to-mod pipeline.
-7. Read [references/reflection-system-notes.md](references/reflection-system-notes.md) when the task involves `UStruct`, `FProperty`, generic field get/set, string-based property lookup, Blueprint bridges, or runtime reflective read/write helpers.
-8. Read [references/iostore-zenloader-notes.md](references/iostore-zenloader-notes.md) when the task involves `Use Io Store`, `AsyncLoader2`, `IoDispatcher`, `IoService`, `.utoc`, `.ucas`, `global.ucas`, `global.utoc`, or modern UE5 loader behavior.
-9. Read [references/uht-reflection-pipeline-notes.md](references/uht-reflection-pipeline-notes.md) when the task involves how `UHT` generates `.generated.h` / `.gen.cpp`, how `GENERATED_BODY()` participates in reflection, or how build-time codegen becomes runtime `UClass` / `FProperty` metadata.
-10. Prefer engine-structure reasoning over blind pointer chasing. The series is valuable because it ties runtime addresses back to UE concepts such as `FName`, `UObject`, `FUObjectArray`, `UWorld`, `IoStore`, and the reflection registration pipeline.
-11. Keep version sensitivity explicit. Offsets, layouts, helper paths, mappings, generated glue, and resource formats may differ across UE4/UE5 titles.
+3. Read [references/gname-encryption-notes.md](references/gname-encryption-notes.md) when a suspected `GName` / `FNamePool` has plausible `Blocks` but unreadable entries, when `None` is encrypted, or when the task is to recover a game-specific name-entry transform.
+4. Read [references/kanxue-notes.md](references/kanxue-notes.md) when the user needs extra conceptual framing around reflection design, `FName` / `NamePool`, `GUObjectArray`, `GWorld`, `PersistentLevel`, actor hierarchy, dump-tool usage, or world-to-screen math from the public preview content of the Kanxue threads.
+5. Read [references/cnblogs-notes.md](references/cnblogs-notes.md) when the task is specifically about recovering the UE5 global trio `GWorld`, `GName`, and `GUObjectArray`, or when the user needs concrete locator strings and example dumper commands.
+6. Read [references/asset-unpack-notes.md](references/asset-unpack-notes.md) when the task involves Pak extraction, AES-key recovery, CUE4Parse repair, UnrealPak workflows, custom loader tracing, or non-standard UE asset encryption.
+7. Read [references/mod-pipeline-notes.md](references/mod-pipeline-notes.md) when the task involves `Mappings.usmap`, FModel export, DCC editing, UE5 repack, `UE4SS`, or a full asset-to-mod pipeline.
+8. Read [references/reflection-system-notes.md](references/reflection-system-notes.md) when the task involves `UStruct`, `FProperty`, generic field get/set, string-based property lookup, Blueprint bridges, or runtime reflective read/write helpers.
+9. Read [references/iostore-zenloader-notes.md](references/iostore-zenloader-notes.md) when the task involves `Use Io Store`, `AsyncLoader2`, `IoDispatcher`, `IoService`, `.utoc`, `.ucas`, `global.ucas`, `global.utoc`, or modern UE5 loader behavior.
+10. Read [references/uht-reflection-pipeline-notes.md](references/uht-reflection-pipeline-notes.md) when the task involves how `UHT` generates `.generated.h` / `.gen.cpp`, how `GENERATED_BODY()` participates in reflection, or how build-time codegen becomes runtime `UClass` / `FProperty` metadata.
+11. Prefer engine-structure reasoning over blind pointer chasing. The series is valuable because it ties runtime addresses back to UE concepts such as `FName`, `UObject`, `FUObjectArray`, `UWorld`, `IoStore`, and the reflection registration pipeline.
+12. Keep version sensitivity explicit. Offsets, layouts, helper paths, mappings, generated glue, and resource formats may differ across UE4/UE5 titles.
 
 ## Article Map
 
 - Read articles `1-2` for Epic/GitHub linkage, engine-source access, and Visual Studio preparation.
 - Read articles `3-9` for `GName`, `FName`, name decryption, manual CE-assisted lookup, and code-side `GetName` reconstruction.
+- Read [references/gname-encryption-notes.md](references/gname-encryption-notes.md) for custom encrypted `GName` / `FNamePool` cases where `Blocks` entries no longer expose plaintext `None`.
 - Read articles `10-15` for `UObject`, `FUObjectArray`, and object dumping across objects, enums, functions, and structs.
 - Read articles `16-18` for `UWorld`, actor lookup, and actor/world position extraction.
 - Read articles `19-22` for world-to-screen conversion, object label rendering, and enemy-only filtering.
@@ -39,6 +41,11 @@ Use this skill to map the UE article series into a repeatable reverse-engineerin
   - `ByteProperty` for `GName` / `FNamePool`
   - `CloseDisregardForGC` for `GUObjectArray`
   - sample `UE4Dumper` commands for strings and SDK dumping
+- Read [references/gname-encryption-notes.md](references/gname-encryption-notes.md) for a focused encrypted-name-pool playbook:
+  - structural `FNamePool` validation
+  - CE confirmation that `Blocks` are transformed
+  - write-side / read-side transform tracing
+  - known-plaintext validation with `None` and reflected property names
 - Read [references/asset-unpack-notes.md](references/asset-unpack-notes.md) for the asset-unpack branch:
   - standard UE unpack toolchain
   - AES-key locating via `FAES::DecryptData`
@@ -89,14 +96,16 @@ Use this when the user needs to recover class names, object names, or the engine
 1. Read articles `3-5` for conceptual grounding: `FName`, `UObjectBase`, `GName`, and the relevant name storage structure.
 2. Read articles `6` and `9` when the immediate task is locating `GName` or validating it manually in Cheat Engine.
 3. Read article `8` when the task is implementing `GetName` in code instead of using CE-only validation.
-4. Read the reflection-design section in [references/kanxue-notes.md](references/kanxue-notes.md) when the user needs a cleaner explanation of why name systems, type systems, and object factories are part of the same reverse target.
-5. Read [references/reflection-system-notes.md](references/reflection-system-notes.md) when the task moves from “what is the reflected type?” to “how do I generically read or write a reflected field at runtime?”
+4. Read [references/gname-encryption-notes.md](references/gname-encryption-notes.md) when the pool shape is correct but block entries are unreadable, when `None` is not plaintext, or when a suspected name-registration function mutates entry bytes.
+5. Read the reflection-design section in [references/kanxue-notes.md](references/kanxue-notes.md) when the user needs a cleaner explanation of why name systems, type systems, and object factories are part of the same reverse target.
+6. Read [references/reflection-system-notes.md](references/reflection-system-notes.md) when the task moves from “what is the reflected type?” to “how do I generically read or write a reflected field at runtime?”
 
 Focus on:
 
 - How names are stored and indexed.
 - How display indices or blocks are resolved.
 - How to validate recovered strings before building logic on top of them.
+- How to separate generic UE layout parsing from a game-specific name-entry decrypt primitive.
 
 ## Object-System Path
 
@@ -221,6 +230,7 @@ Build this branch in order:
 ## Troubleshooting
 
 - If names look wrong, go back to the `GName` and `GetName` articles before debugging overlay code.
+- If the `FNamePool` shape is plausible but `Blocks` do not show `None` or reflected property names, use [references/gname-encryption-notes.md](references/gname-encryption-notes.md) before changing the pool layout parser.
 - If object traversal returns many invalid entries, revisit `FUObjectArray` assumptions and validate version/layout first.
 - If `GWorld`, `GName`, or `GUObjectArray` cannot be recovered, fall back to the concrete locator strings in [references/cnblogs-notes.md](references/cnblogs-notes.md) before broadening the search.
 - If `FModel` or `CUE4Parse` fails even with a recovered key, move to [references/asset-unpack-notes.md](references/asset-unpack-notes.md) and validate Pak header, index, offsets, alignment, and decrypt behavior before assuming the key is wrong.
@@ -244,13 +254,15 @@ Build this branch in order:
 
 - Use [references/series.md](references/series.md) as the full notebook for all 27 UE articles.
 - Use [references/kanxue-notes.md](references/kanxue-notes.md) for public-preview notes from two supplementary Kanxue threads.
+- Use [references/gname-encryption-notes.md](references/gname-encryption-notes.md) for encrypted `GName` / `FNamePool` cases, especially when the pool is structurally valid but name entries are transformed.
 - Use [references/cnblogs-notes.md](references/cnblogs-notes.md) for a focused UE5 `GWorld` / `GName` / `GUObjectArray` locating recipe.
 - Use [references/asset-unpack-notes.md](references/asset-unpack-notes.md) for UE resource-unpack and non-standard Pak reverse workflows.
 - Use [references/mod-pipeline-notes.md](references/mod-pipeline-notes.md) for practical UE5 asset replacement and mod deployment workflows.
 - Use [references/reflection-system-notes.md](references/reflection-system-notes.md) for runtime reflected field access and Blueprint-oriented property tooling.
 - Use [references/iostore-zenloader-notes.md](references/iostore-zenloader-notes.md) for modern loader/container behavior around `.utoc`, `.ucas`, `AsyncLoader2`, and `IoDispatcher`.
 - Use [references/uht-reflection-pipeline-notes.md](references/uht-reflection-pipeline-notes.md) for `UHT`, `.generated.h`, `.gen.cpp`, `uhtmanifest`, and `GENERATED_BODY`.
-- Search by article number or keyword such as `GName`, `FName`, `FUObjectArray`, `UWorld`, `Aactor`, `屏幕坐标转换`, `GetBoneMatrix`, `骨骼`, `IoStore`, `utoc`, `ucas`, `UHT`, or `generated.h`.
+- Search by article number or keyword such as `GName`, `FName`, `FNamePool`, `NamePoolData`, `Blocks`, `None`, `GetDisplayNameEntry`, `FUObjectArray`, `UWorld`, `Aactor`, `屏幕坐标转换`, `GetBoneMatrix`, `骨骼`, `IoStore`, `utoc`, `ucas`, `UHT`, or `generated.h`.
+- Search `gname-encryption-notes.md` for `encrypted entry data`, `Blocks`, `None`, `ByteProperty`, `registration`, `indirect calls`, `RVA`, or `ASLR`.
 - Search `kanxue-notes.md` for `反射`, `GWorld`, `PersistentLevel`, `TArray`, `AActor`, `pitch`, `yaw`, or `roll`.
 - Search `cnblogs-notes.md` for `SeamlessTravel FlushLevelStreaming`, `ByteProperty`, `CloseDisregardForGC`, or `UE4Dumper`.
 - Search `asset-unpack-notes.md` for `FAES::DecryptData`, `LoadIndex`, `CUE4Parse`, `FPakPlatformFile`, `CloseDisregardForGC`, `AESDumpster`, or `winhttp.dll`.
