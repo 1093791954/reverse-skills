@@ -13,6 +13,11 @@ __pycache__/
 .venv/
 venv/
 
+# Node dependencies and build output
+node_modules/
+dist/
+coverage/
+
 # Tool and editor noise
 .idea/
 .vscode/

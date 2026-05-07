@@ -17,6 +17,9 @@ QQ群：`1005370499`
 | `imgui-reverse` | 面向 Windows 游戏逆向覆盖层的 Dear ImGui 工作流，包含外部窗口、DX11 Hook 渲染、消息转发、字体中文支持和常用控件。 |
 | `ue-reverse` | Unreal Engine 逆向工作流，覆盖源码环境准备、`GName` / `FName`、`UObject`、`FUObjectArray`、`UWorld`、Actor 遍历、世界坐标转屏幕坐标、骨骼绘制、IoStore 和反射元数据。 |
 | `packed-sample-analysis` | 合法授权场景下的加壳样本与保护二进制分析流程，重点是静态初筛、运行观察、Dump 校验和安全报告边界。 |
+| `vmp-unpack-analysis` | 合法授权场景下的 VMP/VMProtect 保护样本分析流程，覆盖保护分类、OEP/Dump 校验、VM 边界识别、handler/状态建模和报告交付。 |
+| `jshook-skill` | JavaScript 逆向自动化工具技能，以 submodule 方式引用独立仓库。 |
+| `reverse-skill` | Web JS 逆向分析技能集合，以 submodule 方式引用独立仓库。 |
 
 ## 目录结构
 
@@ -29,10 +32,16 @@ QQ群：`1005370499`
 ├── packed-sample-analysis/
 │   ├── SKILL.md
 │   └── references/
-└── ue-reverse/
+├── ue-reverse/
     ├── SKILL.md
     ├── agents/
     └── references/
+├── vmp-unpack-analysis/
+│   ├── SKILL.md
+│   ├── agents/
+│   └── references/
+├── jshook-skill/          # submodule
+└── reverse-skill/         # submodule
 ```
 
 ## 使用方式
@@ -40,6 +49,12 @@ QQ群：`1005370499`
 把需要的技能目录复制到你的 Codex skills 目录中，或者在 Codex 支持的情况下把本仓库作为本地技能源使用。
 
 每个技能目录里的 `SKILL.md` 是入口文件。`references/` 目录保存更长的参考笔记，实际使用时只需要按任务加载相关文件。
+
+包含 submodule 的完整克隆方式：
+
+```bash
+git clone --recurse-submodules <repo-url>
+```
 
 ## 说明
 

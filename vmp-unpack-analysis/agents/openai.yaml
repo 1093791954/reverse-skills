@@ -1,0 +1,4 @@
+interface:
+  display_name: "VMP Unpack Analysis"
+  short_description: "Authorized VMProtect/VMP unpacking analysis workflows."
+  default_prompt: "Use $vmp-unpack-analysis to plan and validate an authorized VMProtect or VMP protected sample analysis."
