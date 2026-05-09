@@ -231,6 +231,11 @@ function simulateMouseTrack(track) {
 
 ## Path 6: 滑块 / PoW / 验证码（Captcha Path）
 
+> 📌 **本节为速查摘要。完整工作流（22+ 厂商 / 12+ 题型 / 11+ 通用技巧 / 14 条 Path / 教学 demo 全套）已迁移到姊妹技能 `captcha-bypass-analysis`，详见：**
+> - `D:\tmp\SKILLS\captcha-bypass-analysis\SKILL.md` — Path 1 厂商指纹识别、Path 3 滑块距离 CV、Path 4 鼠标轨迹建模、Path 12 PoW 计算
+> - `captcha-bypass-analysis/scripts/` — opencv_slider_gap.py / trajectory_bezier.py / trajectory_three_seg.py / ddddocr_demo.py / pow_friendlycaptcha.md / audio_whisper_demo.py / tls_curl_cffi_demo.py / browser_stealth_demo.md
+> - `captcha-bypass-analysis/references/types/` — slider-distance / slider-puzzle / click-character / click-icon / rotate-image / 3d-object-select / grid-image-select / audio-captcha / invisible-behavior / pow-friendly / space-reasoning / semantic-text
+
 ### 滑块 7 步流程（防水墙、极验、数美、网易易盾通用）
 
 ```
