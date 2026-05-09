@@ -27,3 +27,9 @@ coverage/
 # OS files
 Thumbs.db
 .DS_Store
+
+# Claude Code per-project local settings (machine-specific paths/tokens)
+.claude/
+
+# Playwright MCP capture artifacts (logs, snapshots, screenshots)
+.playwright-mcp/
