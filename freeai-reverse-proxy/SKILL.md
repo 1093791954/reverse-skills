@@ -346,7 +346,7 @@ token 用 `secrets.token_urlsafe(32)` 生成；OpenCode 配 `apiKey` 即可。
 
 ## 文件指引
 
-- `references/site-discovery/` — CSV 评分、拒绝信号 4 类、archive 案例
+- `references/site-discovery/` — CSV 评分、拒绝信号 7 类、5 分钟硬性验证、aliyun captcha 反向、archive 案例
 - `references/protocol-translation/` — fence 协议规约、OpenAI wire format、tool_choice 指令
 - `references/account-pool/` — pool 状态机、proxy 来源、cache 设计
 - `references/stability-fixes/` — 9 个修复的详细 root cause + commit hash
