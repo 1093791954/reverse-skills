@@ -181,9 +181,29 @@ this.$button.onclick = K(n.bind(this), 1e3);
 
 对单个站点（如 NoteGPT 反代）：
 1. **试一次 undetected-chromedriver** + 真实轨迹库 — 1-2 小时 setup
-2. 不过就接 **2captcha / capsolver / yescaptcha** 这类付费打码服务（阿里盾基础滑块 $1-2 / 1000 次） — 30 分钟接入
-3. 如果项目预算允许，付费打码 ROI 远高于自破
+2. ~~不过就接 **2captcha / capsolver / yescaptcha** 这类付费打码服务（阿里盾基础滑块 $1-2 / 1000 次） — 30 分钟接入~~
+   - **2026-05-11 实测更正：CapSolver 不支持阿里盾**。其 createTask 接受的 type 列表只有 reCAPTCHA v2/v3、GeeTest、MTCaptcha、DataDome、AWS WAF、Cloudflare Turnstile / Challenge、ImageToText 共 8 类。试过 `AliyunCaptchaTaskProxyLess` / `AliyunSlidingTaskProxyLess` / `AliyunSliderCaptchaTask` 等多种命名全返回 `ERROR_TYPE_NOT_SUPPORTED`。
+   - 据用户社区报告，**支持阿里盾的服务**：2captcha（要确认）、yescaptcha、nocaptcha.io（**国产**，对阿里盾支持最好）。
+3. 如果项目预算允许，付费打码 ROI 远高于自破 — **但要先确认所选服务支持该 captcha 类型**
 
 对多个站点：
 - 写一个统一的 `captcha_solver_aliyun_sliding(page) -> str` 接口，内部用付费服务作 backend，再叠加 undetected-chromedriver 兜底
 - 接入费可分摊到所有需要破阿里盾的站点
+
+## CapSolver API 支持类型清单（2026-05-11 实测）
+
+| Type | 支持 |
+|---|---|
+| reCAPTCHA v2 / v3 | ✅ |
+| Cloudflare Turnstile | ✅ |
+| Cloudflare Challenge | ✅ |
+| AWS WAF | ✅ |
+| DataDome | ✅ |
+| GeeTest | ✅ |
+| MTCaptcha | ✅ |
+| ImageToText (OCR) | ✅ |
+| **Aliyun Sliding** | ❌ **不支持** |
+| hCaptcha | ✅（旧版有支持） |
+| FunCaptcha | ✅（旧版有支持） |
+
+> 选服务前先用免费 `getBalance` 调用看 key 有效；然后用 `createTask` 试一次目标类型名，看返回 `ERROR_TYPE_NOT_SUPPORTED` 还是真正排队 — 错误请求 capsolver 不扣费，是免费试探。
