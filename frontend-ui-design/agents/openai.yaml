@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend UI Design"
+  short_description: "Design polished web interfaces and flows."
+  default_prompt: "Use this skill to improve web UI layout, visual hierarchy, forms, dashboards, and component states."

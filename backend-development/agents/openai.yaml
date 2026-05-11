@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Development"
+  short_description: "Build reliable backend services and APIs."
+  default_prompt: "Use this skill for backend APIs, data changes, reliability, security, and service operations."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Development Core"
+  short_description: "Plan and review software changes."
+  default_prompt: "Use this skill to plan or review a software change with risk-scaled testing, architecture notes, and delivery checks."

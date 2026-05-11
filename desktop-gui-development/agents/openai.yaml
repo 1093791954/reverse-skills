@@ -1,0 +1,4 @@
+interface:
+  display_name: "Desktop GUI Development"
+  short_description: "Implement desktop windows, controls, and IPC."
+  default_prompt: "Use this skill for Qt, WPF, WinUI, Electron, Tauri, desktop controls, windows, menus, shortcuts, and IPC."

@@ -75,12 +75,23 @@ D:\tmp\SKILLS\software-development-skill-research\
 
 ## 第四阶段：创建技能
 
-- [ ] 使用 `skill-creator` 工作流初始化每个技能目录。
-- [ ] 每个技能至少包含 `SKILL.md`。
-- [ ] 需要细分资料时使用 `references\`，不要把所有内容塞进 `SKILL.md`。
-- [ ] 需要稳定复用的脚本时使用 `scripts\`。
-- [ ] 使用 `quick_validate.py` 验证技能格式。
-- [ ] 确认技能 frontmatter 的 `description` 能准确覆盖触发场景。
+- [x] 使用 `skill-creator` 工作流初始化每个技能目录。
+- [x] 每个技能至少包含 `SKILL.md`。
+- [x] 需要细分资料时使用 `references\`，不要把所有内容塞进 `SKILL.md`。
+- [x] 需要稳定复用的脚本时使用 `scripts\`。
+- [x] 使用 `quick_validate.py` 验证技能格式。
+- [x] 确认技能 frontmatter 的 `description` 能准确覆盖触发场景。
+
+已创建第一批技能：
+
+- [x] `software-development-core`
+- [x] `backend-development`
+- [x] `frontend-development`
+- [x] `frontend-ui-design`
+- [x] `desktop-application-development`
+- [x] `desktop-gui-development`
+- [x] `desktop-gui-design`
+- [x] `devops-sre-production`
 
 ## 第五阶段：验证与迭代
 

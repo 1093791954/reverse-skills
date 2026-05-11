@@ -1,0 +1,4 @@
+interface:
+  display_name: "Desktop GUI Design"
+  short_description: "Design productive native desktop interfaces."
+  default_prompt: "Use this skill to improve desktop app workspace layout, toolbars, property panels, settings, density, and keyboard workflows."

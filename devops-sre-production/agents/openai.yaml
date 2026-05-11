@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevOps SRE Production"
+  short_description: "Prepare services for reliable production."
+  default_prompt: "Use this skill for production readiness, SLOs, monitoring, alerting, deployment, incident response, and runbooks."

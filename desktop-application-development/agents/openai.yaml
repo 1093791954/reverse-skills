@@ -1,0 +1,4 @@
+interface:
+  display_name: "Desktop App Development"
+  short_description: "Build robust desktop application shells."
+  default_prompt: "Use this skill for desktop app architecture, packaging, updates, local data, and OS integration."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Development"
+  short_description: "Build accessible and performant web apps."
+  default_prompt: "Use this skill for frontend behavior, state, performance, accessibility, and tests."
