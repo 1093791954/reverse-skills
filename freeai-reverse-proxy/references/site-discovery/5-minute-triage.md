@@ -114,6 +114,43 @@ DevTools Network 看 chat POST 响应：
 > 2026-05-11 修订：原先认为"system 不能注入 = 死刑"。现在改为：先试 system，不行再试 user 层。**只要任一注入路径成功**就 continue。
 
 
+## 4.5 （**如果需要登录**）注册后立即 dry-run 调目标模型 API
+
+**2026-05-11 血泪经验**：PIAX 整条注册链路（catch-all + IMAP）完整打通后，
+才发现免费用户调 Opus 4.7 直接 401 + "upgrade plan"。如果**先做完注册机
+批量化（写 IMAP 自动接码 + 多账号循环）才测调用** → 浪费 1 天工程。
+
+**强制铁律：注册成功 1 个号 → 立即 curl 一次目标模型 API**：
+
+```bash
+# 假设已经拿到 JWT / cookie / authToken
+TOKEN="<刚拿到的 JWT>"
+curl -s -N -X POST "$SITE/api/.../chat" \
+  -H "Authorization: $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"<target_opus>","query":"Say PONG."}'
+```
+
+判定：
+
+| 响应 | 含义 | 决策 |
+|---|---|---|
+| 实际模型输出 (`"PONG"` 或类似) | 免费层包目标模型 ✅ | **写注册机批量化** |
+| `401` + `"upgrade plan"` / `"subscription"` / `"premium"` | 免费层不含目标模型 ❌ | **archive，不写注册机** |
+| `429` + `"daily limit"` / `"quota exhausted"` | 有配额但用完了 ⚠️ | 看每日额度是否值得做账号池 |
+| `403` / `"region blocked"` / `"IP banned"` | IP 信誉问题 ⚠️ | 上 SOCKS5 池可救 |
+| `200` 但空 / `null` answer | 静默拦截（罕见 wrap 形态）⚠️ | 重试 1 次确认；仍空则 archive |
+
+**总耗时**：30 分钟（注册 1 个号 + curl 1 次）vs 8 小时（写完整注册机后才发现没用）。
+
+> 在第 4 项 ✅ 后**立即**做这一步，不要先去写注册机 / 邮件 IMAP 自动化。
+
+### 现有"已掏注册机但免费层不含目标模型"案例
+
+- `piax.org` (Claude Opus 4.7) — agentId 162 → 401
+- `notegpt.io` (Claude Opus 4.7) — 类似（阿里盾未破前已知 15 次/月，但 Opus 是否在免费层未实测，archive 时跳过）
+
+
 ## 5. 能不能稳定调用 ≥ 10 次？
 
 连续 fire 10 次同一个 prompt（不同 user message），看：
