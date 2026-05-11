@@ -1,12 +1,12 @@
 # 部署到 Linux VPS（Ubuntu 22.04）
 
-> 当前部署目标：`YOUR_VPS_HOST`，Ubuntu 22.04 LTS。
-> 邮件告警：QQ 邮箱 `your-mail@qq.com` → 自身 SMTP 发送。
+> 当前部署目标：你的 Ubuntu 22.04 VPS。
+> 邮件告警：通过 SMTP 应用专用密码发送。
 
 ## 整体架构
 
 ```
-本机 (你的笔记本)                          VPS (YOUR_VPS_HOST)
+本机 (你的笔记本)                          VPS
 ┌────────────────────────┐                ┌──────────────────────────────────┐
 │ playwright 浏览器登录  │                │ /opt/kanxue-crawler/             │
 │   ↓                    │                │   ├ src/                          │
@@ -58,12 +58,12 @@ tar xzf /tmp/kanxue-crawler.tar.gz -C /opt/kanxue-crawler
 ```bash
 cp /opt/kanxue-crawler/deploy/kanxue-crawler.env.example /etc/kanxue-crawler.env
 nano /etc/kanxue-crawler.env
-# 当前 QQ 邮箱配置：
+# SMTP 配置：
 #   KANXUE_SMTP_HOST=smtp.qq.com
 #   KANXUE_SMTP_PORT=465
-#   KANXUE_SMTP_USER=your-mail@qq.com
+#   KANXUE_SMTP_USER=<your-mail@qq.com>
 #   KANXUE_SMTP_PASS=
-#   KANXUE_NOTIFY_TO=your-mail@qq.com
+#   KANXUE_NOTIFY_TO=<recipient@example.com>
 chmod 600 /etc/kanxue-crawler.env
 ```
 
@@ -79,6 +79,17 @@ sudo bash /opt/kanxue-crawler/deploy/install.sh
 3. 创建 `/opt/kanxue-crawler/.venv` 虚拟环境并装依赖
 4. 把 `kanxue-crawler.service` / `kanxue-crawler.timer` 装到 `/etc/systemd/system/`
 5. `systemctl enable --now kanxue-crawler.timer`
+
+如果使用 `python deploy/bootstrap_remote.py` 自动部署，不要在脚本里写服务器或 SMTP 密码。先在本机 shell 设置这些环境变量：
+
+```bash
+export KANXUE_VPS_HOST=YOUR_VPS_HOST
+export KANXUE_VPS_PASS='<ssh-password>'
+export KANXUE_SMTP_USER='<your-mail@qq.com>'
+export KANXUE_SMTP_PASS=
+export KANXUE_NOTIFY_TO='<recipient@example.com>'
+python deploy/bootstrap_remote.py
+```
 
 ### Step 5：把 cookies 推上去
 

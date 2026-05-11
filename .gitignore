@@ -37,3 +37,9 @@ Thumbs.db
 # Kanxue crawler runtime state and scraped output
 Docs/kanxue-crawler/state/
 Docs/kanxue-crawler/output/
+Docs/kanxue-crawler/.env
+Docs/kanxue-crawler/*.env
+Docs/kanxue-crawler/*.local.toml
+Docs/kanxue-crawler/config.local.toml
+Docs/kanxue-crawler/deploy/*.env
+!Docs/kanxue-crawler/deploy/*.env.example

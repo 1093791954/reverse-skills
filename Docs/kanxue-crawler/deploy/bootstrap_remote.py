@@ -20,7 +20,7 @@ PROJECT = Path(__file__).resolve().parent.parent
 REMOTE_ROOT = "/opt/kanxue-crawler"
 
 # QQ 邮箱配置（部署时一次性写入 /etc/kanxue-crawler.env）
-SMTP_HOST = "smtp.qq.com"
+SMTP_HOST = os.environ.get("KANXUE_SMTP_HOST", "smtp.qq.com")
 SMTP_PORT = "465"
 SMTP_USER = os.environ.get("KANXUE_SMTP_USER", "")
 SMTP_PASS = os.environ.get("KANXUE_SMTP_PASS", "")
@@ -134,6 +134,18 @@ def make_tar() -> bytes:
 # ---------------- main ----------------
 
 def main() -> int:
+    required = {
+        "KANXUE_VPS_HOST": HOST,
+        "KANXUE_VPS_PASS": PASSWORD,
+        "KANXUE_SMTP_USER": SMTP_USER,
+        "KANXUE_SMTP_PASS": SMTP_PASS,
+        "KANXUE_NOTIFY_TO": NOTIFY_TO,
+    }
+    missing = [name for name, value in required.items() if not value]
+    if missing:
+        print("missing required environment variables: " + ", ".join(missing), file=sys.stderr)
+        return 2
+
     print(f"connecting to {USER}@{HOST} ...")
     c = reconnect(None)
 
@@ -149,7 +161,7 @@ def main() -> int:
             f"KANXUE_SMTP_HOST={SMTP_HOST}\n"
             f"KANXUE_SMTP_PORT={SMTP_PORT}\n"
             f"KANXUE_SMTP_USER={SMTP_USER}\n"
-            f"KANXUE_SMTP_PASS=
+            f"KANXUE_SMTP_PASS={SMTP_PASS}\n"
             f"KANXUE_NOTIFY_TO={NOTIFY_TO}\n"
         )
         upload_bytes(c, env_content.encode("utf-8"), "/etc/kanxue-crawler.env")
