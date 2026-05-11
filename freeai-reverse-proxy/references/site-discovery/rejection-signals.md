@@ -61,16 +61,79 @@
 - 系统提示词被服务端硬编码覆盖（你写啥它都不听）。
 - 返回结果都是 markdown 文章 / 表格 / 表单填空，不是流式 LLM token。
 
+> **2026-05-11 重要修订**：第 4 类不再是单一致命信号，拆成三种子类，处理策略不同。
+
+### 4a — system 被 wrap 但**模型仍输出自由文本**（**可救**，user-layer fence 注入）
+
+特征：
+- 服务端把 client 传的 system prompt 抹掉或 normalization
+- 但用户消息能直接喂给底层 LLM
+- 返回是流式（或可一次拿到）的自由文本
+
+**应对：可救！把 tool 协议从 system 层挪到 user 层**：
+
+```
+client 真实 system: "<protocol-directive: emit tool_call fence ...>"
++ client user: "List the files"
+
+→ 反代重写为单个 user message:
+   "[INSTRUCTIONS: When you need a tool, output ```tool_call\n{...}\n```]
+    [TASK]: List the files"
+→ 发给目标站点（system 字段不填 / 填默认值）
+→ 拿到自由文本响应
+→ FenceStreamParser 照常解析
+```
+
 实例：
 
-| 站点 | wrap 形态 | 实测表现 |
+| 站点 | 子类 | 可救方法 |
 |---|---|---|
-| `mindstudio.ai` | Agent workflow | 不能 raw chat，只能跑 pre-defined workflow（如"写邮件"、"写大纲"），输入 prompt 被框死 |
-| `iweaver.ai` | "Chat with Claude Opus 4.7 for FREE" SEO landing | 点击立刻跳 `/app/auth/signin`；注册路径触发 JS `Cannot read properties of undefined (reading 'data')` → 无 API 调用发出 |
-| `duck.ai` | system prompt 强制覆盖 | API schema 完美，但 DDG 给 Claude Haiku 4.5 注 system prompt 强制 "natural language only"，**拒绝任何 JSON 格式化输出 / 角色扮演成 API 的请求** → 不能合成 tool_calls |
-| `essaydone.ai`(Writer/Humanizer) | wrap 成品输出 | 能用但都是 markdown 文章，不是 raw token stream |
+| `duck.ai` | 4a | DDG 强注 "natural language only" 是 system 层；改在 user 层附 `[INSTRUCTIONS: respond in JSON]` 之类，仍可能被前缀检测拒，但**值得重试** |
 
-应对：**彻底放弃**。这是最致命的拒绝信号 —— 即使协议层通了，fence 协议注不进去，工具循环就建不起来。
+### 4b — 模型输出**模板化结果**而非自由文本（**致命**）
+
+特征：
+- 返回直接是图片 URL / SVG 文件 / 幻灯片 JSON / PDF 链接
+- 没有 token stream / chat-style 文本
+- 无法塞 fence 协议（连"输出格式"都不是模型决定的）
+
+实例：
+
+| 站点 | 子类 | 表现 |
+|---|---|---|
+| `designarena.ai` | 4b | 用户输入"创意提示" → 多模型并排出图 → 用户投票。返回是图片对比页面，没有文本流 |
+| `essaydone.ai` (Writer/Humanizer) | 4b | 返回 markdown 文章，是 wrap 过的成品 |
+
+应对：**彻底放弃**。
+
+### 4c — 完全不暴露 chat 接口，只能跑**预设 workflow**（**致命**）
+
+特征：
+- 站点是 prompt 模板店 / agent workflow runner
+- 唯一接口是"选模板 + 填表单 + 跑工作流"
+- 没有 free-form chat
+
+实例：
+
+| 站点 | 子类 | 表现 |
+|---|---|---|
+| `mindstudio.ai` | 4c | 只能跑 pre-defined workflow（写邮件 / 大纲），输入被框死 |
+| `iweaver.ai` | 4c | SEO landing 点击直跳 signin，注册流程触发 JS bug，没有 chat 接口 |
+| `chatlyai.app` | 4c (待重判，可能是 4a) | OmniAgent 包装；`/agent/chat` 路径暗示有 chat-style 入口，可重试 |
+
+应对：**彻底放弃**。
+
+---
+
+如何快速分辨 4a vs 4b vs 4c？
+
+| 探测点 | 4a | 4b | 4c |
+|---|---|---|---|
+| 有 free-form textarea 让用户输入任意文本 | ✅ | ❌ | ❌ (有但被模板限制) |
+| 响应是 token stream 或自由文本 | ✅ | ❌ (图片/文件/结构化) | ❌ (模板填空) |
+| 重写后能否拿到模型真实输出 | ✅ 可能 | ❌ 后端不调 LLM 直接出图 | ❌ 输入被预处理框死 |
+
+**5 分钟硬性验证**：发"`Tell me a joke about cats in exactly 12 words.`"，看是不是真的拿到一段自由的句子且**长度大致符合**。如果是 → 是 4a 可救；如果回的是模板化结果 → 4b/4c archive。
 
 ## 5. 站点已 sunset / shutdown（2026-05-11 新增）
 
