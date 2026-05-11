@@ -54,6 +54,35 @@
 
 应对：上 SOCKS5 池可解，但配额低，要做 account-pool 轮换。
 
+## 6. "User-Pays" 模型陷阱（2026-05-11 新增）
+
+特征：站点宣传 **"Free Unlimited AI API — No API key, no signup, no server"**，但实际是 **"由你的网站访客出钱"**（User-Pays / Bring-Your-Own-User）：
+- dev 在自家网站嵌入站点 SDK（如 `<script src="https://js.xyz.com/v2/"></script>`）
+- 当**终端用户**首次触发 AI 调用时，SDK 弹出第三方账号 OAuth 登录窗口
+- 登录后 SDK 拿到该用户的 `authToken`，用该用户的配额（kWh 或 token）扣费
+- 对 dev 而言是免费，对终端用户而言是付费/有配额上限
+
+实例：
+
+| 站点 | 触发表现 | 揭穿点 |
+|---|---|---|
+| `puter.com` (puter.js) | README "Free, Unlimited Claude Opus 4.7" + "No API keys or sign-ups required" | SDK 内 `puter.ui.authenticateWithPuter()` 自动弹 OAuth；`/get-gui-token` 匿名 401；注册路径有 Turnstile |
+
+**检测信号（5 分钟内可判定）**：
+
+1. SDK 源码 grep `signIn` / `authenticate` / `bearer` / `oauth` / `popup` 全部命中
+2. 演示页面打开后控制台报 `401 Unauthorized` 在 `/whoami` / `/get-gui-token` / `/lsmod` 这类调用
+3. README 反复强调 "无 API key" 但**绝口不提"终端用户登录"**
+
+应对：
+
+- **如果你的目标是反代后端**（让 OpenCode/Codex 跑工具循环）→ **archive**。SDK 弹窗终端用户登录、单账号配额、注册需破 Turnstile，代价远超收益。
+- 如果你的目标是给前端项目嵌 SDK 给真实用户用 → 这是 OK 的（用户掏自己钱）。
+
+> User-Pays 不是 4 类拒绝信号的子项，单独立第 6 类，因为它包装得像"完美匿名 API"，特别容易上当。
+
+## 灰区案例
+
 ## 4. B2B / Agent wrap（最致命）
 
 特征：
