@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  title: Orders API
+  version: 1.0.0
+paths:
+  /orders:
+    get:
+      summary: List orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        "200":
+          description: Orders page
+        "401":
+          description: Missing or invalid authentication
+        "403":
+          description: Missing permission for account
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

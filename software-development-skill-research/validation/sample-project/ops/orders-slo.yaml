@@ -1,0 +1,14 @@
+service: orders-api
+owner: commerce-platform
+sli:
+  name: successful_order_list_requests
+  description: "Fraction of authenticated GET /orders requests that return 2xx within 500ms."
+slo:
+  target: 99.5
+  window: 30d
+alerts:
+  - name: orders-api-fast-burn
+    type: burn-rate
+    page: true
+runbook:
+  url: https://example.invalid/runbooks/orders-api

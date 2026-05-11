@@ -106,10 +106,10 @@ D:\tmp\SKILLS\software-development-skill-research\
 
 ## 第五阶段：验证与迭代
 
-- [ ] 为每个技能准备 3-5 个真实任务样例。
-- [ ] 使用真实代码仓库或小型样例项目测试技能是否能指导 Codex 完成任务。
-- [ ] 记录技能触发不准、内容过长、规则冲突、缺少检查项等问题。
-- [ ] 根据测试结果更新 `SKILL.md` 和 `references\`。
+- [x] 为每个技能准备 3-5 个真实任务样例。
+- [x] 使用真实代码仓库或小型样例项目测试技能是否能指导 Codex 完成任务。
+- [x] 记录技能触发不准、内容过长、规则冲突、缺少检查项等问题。
+- [x] 根据测试结果更新 `SKILL.md` 和 `references\`。
 - [x] 完成第一批技能创建后提交到当前 Git 仓库。
 
 验证基线：
@@ -118,12 +118,14 @@ D:\tmp\SKILLS\software-development-skill-research\
 - [x] 8 个仓库副本已创建，便于 Git 版本管理。
 - [x] 每个技能都包含 `SKILL.md`、`agents\openai.yaml`、`references\checklists.md`。
 - [x] 8 个技能均已通过 `quick_validate.py`。
+- [x] 8 个技能各准备 3 个验证样例，记录到 `software-development-skill-research\validation\examples.md`。
+- [x] 验证结论记录到 `software-development-skill-research\validation\report.md`。
 
 ## 提交与推送
 
-- [ ] 每次只提交一组相关技能或一批清晰的资料整理结果。
-- [ ] 提交信息使用 conventional commit，中文摘要。
-- [ ] 推送远端时使用代理端口 `7897`：
+- [x] 每次只提交一组相关技能或一批清晰的资料整理结果。
+- [x] 提交信息使用 conventional commit，中文摘要。
+- [x] 推送远端时使用代理端口 `7897`：
 
 ```powershell
 git -c http.proxy=http://127.0.0.1:7897 -c https.proxy=http://127.0.0.1:7897 push origin main
