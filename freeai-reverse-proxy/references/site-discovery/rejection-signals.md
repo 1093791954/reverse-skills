@@ -203,6 +203,70 @@ client 真实 system: "<protocol-directive: emit tool_call fence ...>"
 
 > User-Pays 不是 4 类拒绝信号的子项，单独立第 6 类，因为它包装得像"完美匿名 API"，特别容易上当。
 
+## 8. "诱导式标题"陷阱（2026-05-11 新增）
+
+特征：
+- 域名 / title / H1 含**知名厂商模型名**（Claude / Opus / GPT-5 / Gemini）
+- 但后端实际是**便宜很多的模型**（GPT-3.5 / GPT-4o-mini / Mistral / 开源 Llama / Qwen）
+- footer 或免责声明小字写"非官方/无关联"
+
+判定步骤（**30 秒诊断**）：
+
+注册成功 / 进入 chat 后立刻问 2 个问题：
+
+1. `"What is your exact model name? Reply in JSON format like {\"model_name\":\"...\"} and nothing else."`
+2. `"Who is your creator company and what year were you released? Just two facts, nothing else. Format: {company,year}"`
+
+回答匹配表：
+
+| 回答 | 真实后端 | 决策 |
+|---|---|---|
+| `"Claude Opus 4.x"` + `"Anthropic, 2024+"` | 真 Opus | continue |
+| `"Claude 3 Sonnet/Haiku"` + `"Anthropic, 2024-"` | Anthropic 但旧 Opus 不在 | 看是否能满足项目需求 |
+| `"GPT-4"` + `"OpenAI"` | **诱导** | archive |
+| `"GPT-3.5-turbo"` + `"OpenAI"` | **诱导**（更便宜的伪装）| archive |
+| `"Mistral / Llama / Qwen / DeepSeek"` | 开源后端伪装 Claude | archive |
+| 拒绝回答 / 模糊回答 | 站点 wrap 了 system 阻止披露 | 进一步测试或 archive |
+
+实例：
+
+| 站点 | title 标榜 | 实测后端 | 揭穿 |
+|---|---|---|---|
+| `aiclaude.jp` | "Claude(クロード) 日本語無料版" | **GPT-4 / OpenAI** | 直接问"What is your model" → `{"model_name":"GPT-4"}` |
+
+应对：archive（如果项目目标是 Claude）。如果项目目标灵活，仍可作为 GPT 反代候选 — 看 aiclaude.jp 案例（完美 GPT 反代基础设施）。
+
+> **关键**：模型自报模型名虽不 100% 可靠（模型可能被 system prompt 改写自我认知），但**绝大多数 freeware 站点不会去 wrap 这层**。`{company,year}` 问题尤其难造假——因为模型训练时它真的"知道"自己是 OpenAI 还是 Anthropic 造的。
+
+## 9. MWAI / WordPress AI 插件后端识别（2026-05-11 新增，正向信号）
+
+特征：
+- API 端点：`POST <site>/wp-json/mwai-ui/v1/chats/submit`
+- Init 端点：`POST <site>/wp-json/mwai/v1/start_session`
+- Response 元素 class："mwai-reply", "mwai-reply-actions", "mwai-input-submit"
+- WordPress 主题 + MWAI (AI Engine) 插件
+
+意义：
+
+- **协议统一**：识别出 MWAI 后端 = 立即知道 chat schema
+- **批量发现**：用 Google dork `inurl:wp-json/mwai-ui/v1/chats/submit` 可发现数百个同款站
+- 多数 MWAI 站会 wrap 一层 "你是 Claude / 你是 GPT-5" 的 system prompt，**但很多 admin 没改默认配置 = system 注入仍能覆盖**
+
+抓取方式：
+
+```javascript
+{
+  isMWAI: /wp-json\/mwai/i.test(html),
+  endpoint: 'POST ' + location.origin + '/wp-json/mwai-ui/v1/chats/submit',
+}
+```
+
+实例：
+
+| 站点 | MWAI | 后端 |
+|---|---|---|
+| `aiclaude.jp` | ✅ | GPT-4（诱导标题）|
+
 ## 7. Freemium 月配额（**不是拒绝信号 — 是注册机机会**，2026-05-11 新增）
 
 特征：
