@@ -18,28 +18,28 @@ D:\tmp\SKILLS\software-development-skill-research\
 
 ## 第一阶段：技能分类定稿
 
-- [ ] 确认第一批技能名称和边界。
-- [ ] 确认哪些技能需要独立创建，哪些技能只作为参考资料合并进已有技能。
-- [ ] 避免技能描述过宽，确保每个技能能被 Codex 准确触发。
+- [x] 确认第一批技能名称和边界。
+- [x] 确认哪些技能需要独立创建，哪些技能只作为参考资料合并进已有技能。
+- [x] 避免技能描述过宽，确保每个技能能被 Codex 准确触发。
 
 建议第一批技能：
 
-- [ ] `software-development-core`：通用开发流程、代码质量、重构、测试、调试、交付检查。
-- [ ] `backend-development`：API、数据库、缓存、队列、鉴权、并发、可靠性、部署。
-- [ ] `frontend-development`：React/Vue/TypeScript、状态管理、路由、构建、性能、测试。
-- [ ] `frontend-ui-design`：Web UI/UX、布局、组件、视觉层级、响应式、表单、仪表盘。
-- [ ] `desktop-application-development`：桌面应用架构、配置、更新、安装包、系统集成、跨平台发布。
-- [ ] `desktop-gui-development`：Qt/WPF/WinUI/Electron/Tauri/native GUI 控件、事件、窗口、菜单、快捷键。
-- [ ] `desktop-gui-design`：桌面软件信息架构、工具栏、属性面板、设置页、专业软件工作流。
-- [ ] `devops-sre-production`：CI/CD、发布、监控、日志、告警、回滚、容量、故障处理。
+- [x] `software-development-core`：通用开发流程、代码质量、重构、测试、调试、交付检查。
+- [x] `backend-development`：API、数据库、缓存、队列、鉴权、并发、可靠性、部署。
+- [x] `frontend-development`：React/Vue/TypeScript、状态管理、路由、构建、性能、测试。
+- [x] `frontend-ui-design`：Web UI/UX、布局、组件、视觉层级、响应式、表单、仪表盘。
+- [x] `desktop-application-development`：桌面应用架构、配置、更新、安装包、系统集成、跨平台发布。
+- [x] `desktop-gui-development`：Qt/WPF/WinUI/Electron/Tauri/native GUI 控件、事件、窗口、菜单、快捷键。
+- [x] `desktop-gui-design`：桌面软件信息架构、工具栏、属性面板、设置页、专业软件工作流。
+- [x] `devops-sre-production`：CI/CD、发布、监控、日志、告警、回滚、容量、故障处理。
 
 ## 第二阶段：GitHub 搜集
 
-- [ ] 为每个技能方向列 GitHub 搜索关键词。
-- [ ] 搜集高质量 repositories、awesome lists、engineering handbooks、style guides、checklists。
-- [ ] 优先选择有明确 license、长期维护、star/fork/issue 活跃度合理的项目。
-- [ ] 记录每个来源的 URL、license、适合提炼的内容、是否可直接引用或只能总结。
-- [ ] 排除不明授权、复制粘贴书籍内容、侵权资料镜像。
+- [x] 为每个技能方向列 GitHub 搜索关键词。
+- [x] 搜集高质量 repositories、awesome lists、engineering handbooks、style guides、checklists。
+- [x] 优先选择有明确 license、长期维护、star/fork/issue 活跃度合理的项目。
+- [x] 记录每个来源的 URL、license、适合提炼的内容、是否可直接引用或只能总结。
+- [x] 排除不明授权、复制粘贴书籍内容、侵权资料镜像。
 
 候选搜索方向：
 
@@ -57,11 +57,11 @@ D:\tmp\SKILLS\software-development-skill-research\
 
 ## 第三阶段：资料整理
 
-- [ ] 在 `software-development-skill-research\sources\` 保存来源索引。
-- [ ] 在 `software-development-skill-research\notes\` 为每个技能方向整理摘要。
-- [ ] 将重复内容合并为统一规则，保留冲突点和适用条件。
-- [ ] 把实践规则写成 Codex 可执行的流程、检查清单和决策准则。
-- [ ] 避免长篇教程化内容，技能正文保持精简。
+- [x] 在 `software-development-skill-research\sources\` 保存来源索引。
+- [x] 在 `software-development-skill-research\notes\` 为每个技能方向整理摘要。
+- [x] 将重复内容合并为统一规则，保留冲突点和适用条件。
+- [x] 把实践规则写成 Codex 可执行的流程、检查清单和决策准则。
+- [x] 避免长篇教程化内容，技能正文保持精简。
 
 建议研究目录：
 
@@ -99,4 +99,3 @@ D:\tmp\SKILLS\software-development-skill-research\
 ```powershell
 git -c http.proxy=http://127.0.0.1:7897 -c https.proxy=http://127.0.0.1:7897 push origin main
 ```
-
