@@ -162,6 +162,28 @@ client 真实 system: "<protocol-directive: emit tool_call fence ...>"
 - 登录后 SDK 拿到该用户的 `authToken`，用该用户的配额（kWh 或 token）扣费
 - 对 dev 而言是免费，对终端用户而言是付费/有配额上限
 
+### 6.1 BYOK 子类（**2026-05-11 新增，来源：multio.chat**）
+
+特征：
+- 站点明确标 "**Free chat with open-source models**" + "**BYOK (Bring Your Own Keys)**" 用顶级模型
+- 免费层给 Llama / DeepSeek / Mistral / Qwen 等**开源** models
+- Claude / GPT-5 / Gemini / Grok 需要**用户自己填 Anthropic / OpenAI API key**
+
+文案标志（看到立即 archive）：
+- "**bring your own keys**" / "**BYOK**" / "**bring your own API**"
+- "**use your subscription**" / "**connect your account**" 对 Claude/GPT-5
+- "**Free open-source models** + BYOK premium"
+
+实例：
+
+| 站点 | 形态 | 揭穿点 |
+|---|---|---|
+| `multio.chat` | "Free chat with leading open-source models out of the box. Bring your own keys for direct premium chat." | landing 页"POWER USER BYOK MODE"明示；Claude/GPT-5/Gemini/Grok 标 BYOK |
+
+应对：**立即 archive**。BYOK 让"白嫖"目标失效 — 用户已付钱给原厂，反代是多此一举。
+
+---
+
 实例：
 
 | 站点 | 触发表现 | 揭穿点 |
