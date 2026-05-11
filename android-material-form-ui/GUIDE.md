@@ -26,8 +26,8 @@ Material 3 文档明确支持两种 label 模式：
     android:textStyle="bold"
     android:textSize="14sp" />
 <com.google.android.material.textfield.TextInputLayout
-    app:placeholderText="https://otokapi.com/v1"
-    app:helperText="默认: https://otokapi.com/v1">
+    app:placeholderText="https://example.com/v1"
+    app:helperText="示例: https://example.com/v1">
     <com.google.android.material.textfield.TextInputEditText ... />
 </com.google.android.material.textfield.TextInputLayout>
 ```
@@ -202,7 +202,7 @@ adb pull /sdcard/u.xml .
 ```
 
 ### 8.2 用 OCR 验证视觉效果
-渲染后用 PaddleOCR/RapidOCR 识别截图。如果 OCR 把两层文字识别成一团乱码（如 "认Beepy.7hotoa bttom/otokapi.c"），说明文字层在物理上重叠了。
+渲染后用 PaddleOCR/RapidOCR 识别截图。如果 OCR 把两层文字识别成一团乱码（如 "认Beepy.7hotoa bttom/example.c"），说明文字层在物理上重叠了。
 
 ### 8.3 启用 Layout Bounds 调试
 开发者选项 → "显示布局边界"，可视化看每个 View 的物理区域。
@@ -214,9 +214,9 @@ adb pull /sdcard/u.xml .
 ┌──────────────────────────────────────┐
 │  API Base URL                         │ ← Floating label (短)
 │  ┌──────────────────────────────┐    │
-│  │ https://otokapi.com/v1       │    │ ← Placeholder
+│  │ https://example.com/v1        │    │ ← Placeholder
 │  └──────────────────────────────┘    │
-│  默认: https://otokapi.com/v1         │ ← Helper text
+│  示例: https://example.com/v1         │ ← Helper text
 │                                       │
 │  API Key                              │
 │  ┌──────────────────────────┬───┐    │
