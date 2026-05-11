@@ -43,17 +43,28 @@ D:\tmp\SKILLS\software-development-skill-research\
 
 候选搜索方向：
 
-- [ ] `software engineering handbook`
-- [ ] `backend best practices`
-- [ ] `api design guidelines`
-- [ ] `frontend checklist`
-- [ ] `frontend performance checklist`
-- [ ] `ui design system guidelines`
-- [ ] `desktop application architecture`
-- [ ] `qt application best practices`
-- [ ] `electron security checklist`
-- [ ] `sre handbook`
-- [ ] `production readiness checklist`
+- [x] `software engineering handbook`
+- [x] `backend best practices`
+- [x] `api design guidelines`
+- [x] `frontend checklist`
+- [x] `frontend performance checklist`
+- [x] `ui design system guidelines`
+- [x] `desktop application architecture`
+- [x] `qt application best practices`
+- [x] `electron security checklist`
+- [x] `sre handbook`
+- [x] `production readiness checklist`
+
+已完成补充搜索与审查：
+
+- [x] 安全编码：OWASP Secure Coding、API Security Top 10、ASVS、CISA Secure by Design。
+- [x] 测试策略：Test Pyramid、Google E2E 测试建议、Microsoft unit testing。
+- [x] 架构文档：ADR、C4、arc42。
+- [x] 可观测性：OpenTelemetry、Prometheus alerting、Azure Operational Excellence。
+- [x] API 设计：OpenAPI、Google AIP、Zalando RESTful API Guidelines、JSON:API。
+- [x] 可访问性：WCAG 2.2、ARIA APG、GOV.UK accessibility。
+- [x] 设计模式与大型工程架构：GoF 23、Repository/DI/Unit of Work、DDD、bounded context、hexagonal architecture、well-architected。
+- [x] 自我审查：URL 可访问性、GitHub license、统计口径和剩余风险已记录到 `software-development-skill-research\sources\audit-log.md`。
 
 ## 第三阶段：资料整理
 
@@ -99,7 +110,14 @@ D:\tmp\SKILLS\software-development-skill-research\
 - [ ] 使用真实代码仓库或小型样例项目测试技能是否能指导 Codex 完成任务。
 - [ ] 记录技能触发不准、内容过长、规则冲突、缺少检查项等问题。
 - [ ] 根据测试结果更新 `SKILL.md` 和 `references\`。
-- [ ] 完成后提交到当前 Git 仓库。
+- [x] 完成第一批技能创建后提交到当前 Git 仓库。
+
+验证基线：
+
+- [x] 8 个正式技能已同步到 `C:\Users\GOD\.codex\skills\`。
+- [x] 8 个仓库副本已创建，便于 Git 版本管理。
+- [x] 每个技能都包含 `SKILL.md`、`agents\openai.yaml`、`references\checklists.md`。
+- [x] 8 个技能均已通过 `quick_validate.py`。
 
 ## 提交与推送
 
