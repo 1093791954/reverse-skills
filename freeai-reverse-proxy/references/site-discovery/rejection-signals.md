@@ -72,6 +72,25 @@
 
 应对：**彻底放弃**。这是最致命的拒绝信号 —— 即使协议层通了，fence 协议注不进去，工具循环就建不起来。
 
+## 5. 站点已 sunset / shutdown（2026-05-11 新增）
+
+特征：
+- 首页 title 含 `Legacy` / `Archive` / `Goodbye` / `Sunset` / `Story`
+- 文案含**过去时 + 明确日期区间**："June 2024 — April 2026"、"provided/served free access"
+- 主区域是 "By the Numbers" 回顾页（registered users / countries / models retired），不是 chat 入口
+- 没有 textarea / chat input
+
+实例：
+
+| 站点 | sunset 信号 | 实测表现 |
+|---|---|---|
+| `yupp.ai` | title="Legacy \| Yupp"、"June 2024 — April 2026 Yupp **provided** free access" | 1M+ users / 90K Discord / 200 countries / 900+ AI models 全是回顾数据，没有 chat 接口 |
+| `yupp.dev` | 整域名 ERR_TIMED_OUT | yupp 的开发者域名一同下线 |
+
+应对：**永久 archive，不重试**。"曾经存在但 sunset"是不可逆信号。
+
+> 检测可以做到非常早：访问首页前 **先看 HTML title + body 第一屏文字**，含 "Legacy/Sunset/Story/2024 — 2026" 关键词 + 没有 textarea = 直接 archive，30 秒就能判断。
+
 ## 灰区案例
 
 | 站点 | 状态 | 备注 |
@@ -89,3 +108,26 @@
 1. 5 分钟硬性验证（详见 `5-minute-triage.md`）。
 2. 看到 4 类拒绝信号之一 → **立即** archive，写 README 留教训。
 3. 不要在 archive 站点上花超过 30 分钟。
+
+## 规则修订记录
+
+### 2026-05-11 — 放宽"登录"限制
+
+旧规则：站点必须**完全不登录**才进入下一步，否则 archive。
+新规则：**允许域名邮箱注册路径**（用户接受跑批量域名邮箱）。也即：
+
+| 站点形态 | 旧规则 | 新规则 |
+|---|---|---|
+| 完全不登录就能聊（chatgpt.org 类）| ✅ 通过 | ✅ 通过 |
+| 邮箱注册 + magic-link / 验证码完成登录 | ❌ archive | ⚠️ **可以试** — 看注册路径是否被 captcha 卡死、是否接受 `.xyz` / 一次性邮箱 |
+| 强电话号 / 强信用卡 / KYC | ❌ archive | ❌ 仍 archive |
+| reCAPTCHA Enterprise / 高级 captcha | ❌ archive | ❌ 仍 archive（破不掉）|
+| 一般 Turnstile / hCaptcha 基础 | ❌ archive | ⚠️ 降级到不优先（理论可叠 captcha solver，但成本高）|
+| B2B / Agent wrap | ❌ archive | ❌ 仍 archive（结构性，登录也救不了）|
+| system prompt 被 wrap | ❌ archive | ❌ 仍 archive（同上）|
+
+实际操作：判定登录形态后，**继续走 5 分钟验证的第 2 步起**（不 wrap system + 流式 SSE + system 可注入 + 稳定 ≥ 10 次）。如果这几项都过且只是登录拦路，那这是个**值得做注册机**的候选（参考 atxp.chat 注册机经验，但避开它的 rate-limit）。
+
+### 2026-05-11 — 新增第 5 类（sunset）拒绝信号
+
+见上文 "5. 站点已 sunset / shutdown"。来源：Yupp 实测发现。

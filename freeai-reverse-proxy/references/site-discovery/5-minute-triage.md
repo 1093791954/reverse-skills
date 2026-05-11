@@ -19,15 +19,44 @@ URL:          ____
 
 打开首页 → 找到 chat 入口 → 发一条消息。
 
-- ✅ 直接出结果 → continue
-- ❌ 必须注册 / 登录 → 看 step 2
-- ❌ 必须订阅付费 → **archive(付费墙)**
+## 0.5 站点是否还活着？（30 秒，**最早判断**）
 
-如果必须注册，看注册流程：
+访问首页前先看 HTML title + body 第一屏文字。如果出现：
 
-- ✅ 邮箱 magic-link 一次性 → continue（注意 magic-link 可能被重定向 prefetch 消费）
-- ❌ 强制电话号 / 信用卡 → **archive(支付墙)**
-- ❌ Cloudflare Turnstile / reCAPTCHA Enterprise 的 IP-rep 墙 → **archive(captcha 墙)**
+- title 含 `Legacy` / `Archive` / `Goodbye` / `Sunset` / `Story`
+- body 含**过去时 + 日期区间**（如 "June 2024 — April 2026", "previously provided", "served from..to"）
+- 没有任何 textarea / chat input
+
+→ **立即 archive 第 5 类（sunset）**。30 秒识别，不要进任何后续步骤。
+
+## 1. 登录形态识别 + DOM 级 captcha 探测
+
+访问首页 → 同时观察 chat 入口与登录拦截器。
+
+**(a) 用 DOM 快速检测 captcha**（30 秒，比 DevTools 抓包快得多）：
+
+```javascript
+{
+  recaptcha: /recaptcha/i.test(document.documentElement.outerHTML),
+  turnstile: /turnstile/i.test(document.documentElement.outerHTML),
+  hcaptcha: /hcaptcha/i.test(document.documentElement.outerHTML),
+}
+```
+
+- 任意命中 → 优先级降低；命中 reCAPTCHA Enterprise（看 `recaptchaIframes` 里有 `enterprise/anchor`）→ **直接 archive**
+
+**(b) 判定登录形态**：
+
+| 形态 | 处理 |
+|---|---|
+| ✅ 完全不登录就能聊（chatgpt.org 类）| 直接 continue 到 step 2 |
+| ⚠️ 邮箱注册 + magic-link / 验证码 | **可以试** — 看域名邮箱（`.xyz` / Gmail+alias / 一次性邮箱）能否过；过了就 continue |
+| ❌ 强电话号 / 强信用卡 / KYC | archive(支付墙) |
+| ❌ reCAPTCHA Enterprise + IP-rep 墙 | archive(captcha 墙) |
+| ❌ 强制 Google/Apple OAuth 唯一登录 | archive（无法批量化）|
+
+> 2026-05-11 规则修订：**登录不再是硬阻断**，"域名邮箱可注册"路径可接受。详见 `rejection-signals.md` 末尾"规则修订记录"。
+
 
 ## 2. 后端是真模型还是 wrap？
 
