@@ -1,0 +1,13 @@
+[Unit]
+Description=Run kanxue-crawler daily
+Documentation=file:///opt/kanxue-crawler/README.md
+
+[Timer]
+# 每天 03:17 跑一次。错峰避免整点。Persistent=true 保证 VPS 重启错过窗口时下次启动会补跑。
+OnCalendar=*-*-* 03:17:00
+RandomizedDelaySec=900
+Persistent=true
+Unit=kanxue-crawler.service
+
+[Install]
+WantedBy=timers.target

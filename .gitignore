@@ -33,3 +33,7 @@ Thumbs.db
 
 # Playwright MCP capture artifacts (logs, snapshots, screenshots)
 .playwright-mcp/
+
+# Kanxue crawler runtime state and scraped output
+Docs/kanxue-crawler/state/
+Docs/kanxue-crawler/output/

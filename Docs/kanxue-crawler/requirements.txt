@@ -1,0 +1,6 @@
+httpx[http2]>=0.27
+selectolax>=0.3.21
+tenacity>=8.2
+tqdm>=4.66
+# Python 3.10 fallback for tomllib (3.11+ 自带，3.10 装这个)
+tomli>=2.0; python_version < "3.11"
