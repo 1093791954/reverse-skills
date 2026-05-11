@@ -15,7 +15,7 @@
 | https://google.github.io/eng-practices/ | 官方工程实践 | A | code review, maintainability | Code review 的目标、reviewer/author 职责、可维护性优先级、变更规模控制 | 总结规则，不复刻原文 |
 | https://docs.gitlab.com/development/code_review/ | 官方开发文档 | A | code review, MR workflow | MR 审查流程、domain expert、review etiquette、review SLO | 总结流程和检查点 |
 | https://handbook.gitlab.com/handbook/engineering/workflow/code-review/ | 官方 handbook | A | engineering workflow | review response SLO、maintainer/domain expert 模型、PTO/阻塞处理 | 适合 software-development-core |
-| https://github.com/microsoft/api-guidelines | 官方 GitHub repo | A | API design | REST API 命名、一致性、版本、错误、分页、兼容性 | 查看仓库 license 后再引用；技能中只总结 |
+| https://github.com/microsoft/api-guidelines | 官方 GitHub repo | A | API design | REST API 命名、一致性、版本、错误、分页、兼容性 | GitHub API 显示 license=Other；只总结，不复制内容 |
 | https://docs.github.com/en/rest/using-the-rest-api | 官方文档 | A | API usage | 认证、分页、rate limit、错误处理、最佳实践 | 适合 backend-development |
 | https://web.dev/performance | 官方文档 | A | frontend performance | Core Web Vitals、PageSpeed、DevTools、性能课程入口 | 适合 frontend-development |
 | https://web.dev/articles/vitals | 官方文档 | A | Core Web Vitals | LCP/INP/CLS、75th percentile、RUM 与工具测量 | 适合 frontend-development |
@@ -32,14 +32,14 @@
 | https://designsystem.digital.gov/documentation/code-guidelines/ | 官方设计系统 | A | design system | USWDS code guidelines、贡献流程、可访问性/一致性 | 适合 frontend-ui-design |
 | https://government.github.io/best-practices/design-systems/ | 政府 GitHub Pages | B | design systems | 政府设计系统索引、style guide/playbook 命名差异 | 适合词表扩展 |
 | https://www.interface.guide/ | 设计 guideline | B | web interface | keyboard、focus、hit target、loading、optimistic update、destructive action | 适合 frontend-ui-design |
-| https://github.com/mercari/production-readiness-checklist | GitHub repo | B | production readiness | 微服务上线前检查、服务 live readiness | 查看 repo license 后再引用 |
-| https://github.com/kgoralski/microservice-production-readiness-checklist | GitHub repo | B | microservice readiness | observability、database、API、SDK 支持边界 | 查看 repo license 后再引用 |
-| https://github.com/futurice/backend-best-practices | GitHub repo | B | backend | go-live checklist、日志、持久化、部署、责任划分 | 查看 repo license 后再引用 |
-| https://github.com/joho/awesome-code-review | GitHub repo | B | code review | code review 资料索引、论文、工具、公司实践 | curated list，只作为入口 |
-| https://github.com/yasir2000/awesome-software-architecture | GitHub repo | B | architecture | 架构模式、原则、测试、工程博客入口 | curated list，只作为入口 |
+| https://github.com/mercari/production-readiness-checklist | GitHub repo | B | production readiness | 微服务上线前检查、服务 live readiness | GitHub API 显示 MIT；可总结，引用需保留来源 |
+| https://github.com/kgoralski/microservice-production-readiness-checklist | GitHub repo | B | microservice readiness | observability、database、API、SDK 支持边界 | GitHub API 显示 Apache-2.0；可总结，引用需保留来源 |
+| https://github.com/futurice/backend-best-practices | GitHub repo | B | backend | go-live checklist、日志、持久化、部署、责任划分 | GitHub API 显示 license=Other；只总结，不复制内容 |
+| https://github.com/joho/awesome-code-review | GitHub repo | B | code review | code review 资料索引、论文、工具、公司实践 | GitHub API 未返回 license；只作为入口 |
+| https://github.com/yasir2000/awesome-software-architecture | GitHub repo | B | architecture | 架构模式、原则、测试、工程博客入口 | GitHub API 显示 CC0-1.0；curated list，只作为入口 |
 | https://devlevel.app/ | 技能矩阵 | B | skill taxonomy | backend/frontend/devops/SRE/infra/release role taxonomy | 用于技能分类校准 |
-| https://github.com/vadimcomanescu/codex-skills | GitHub repo | C | Codex skills | 现有技能 catalog、frontend/backend/devops 技能命名参考 | 只做命名和触发描述参考 |
-| https://github.com/akillness/oh-my-skills | GitHub repo | C | Codex skills | 技能集合、TDD、debugging、architecture、design-system 命名 | 只做技能工程参考 |
+| https://github.com/vadimcomanescu/codex-skills | GitHub repo | C | Codex skills | 现有技能 catalog、frontend/backend/devops 技能命名参考 | GitHub API 显示 MIT；只做命名和触发描述参考 |
+| https://github.com/akillness/oh-my-skills | GitHub repo | C | Codex skills | 技能集合、TDD、debugging、architecture、design-system 命名 | GitHub API 未返回 license；只做技能工程参考 |
 | https://www.reddit.com/r/sre/ | 论坛 | C | SRE practice | runbook、postmortem、SLO 实操痛点 | 只作为词表扩展 |
 | https://www.reddit.com/r/Frontend/ | 论坛 | C | frontend/UI | 后端开发者补 UI 能力、design system、user flow | 只作为词表扩展 |
 

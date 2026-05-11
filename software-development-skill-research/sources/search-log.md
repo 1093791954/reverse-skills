@@ -17,19 +17,23 @@
   - `desktop application architecture best practices GitHub Electron Tauri Qt WPF`
   - `SRE handbook production readiness checklist Google SRE book official GitHub`
 
+## 轮次统计口径
+
+下表是研究过程中的人工归纳计数，不是由脚本精确去重生成的审计数字。它只用于判断是否继续扩展搜索；正式创建技能时，应以 `sources/index.md` 中逐条验证过的来源为准。
+
 ## 轮次统计
 
 | 轮次 | 目的 | 有效来源 | 新增术语 | 新增分类 | 结论 |
 |---:|---|---:|---:|---:|---|
-| 0 | 从 TODO 中建立种子词表 | 0 | 38 | 8 | 建立初始分类：core/backend/frontend/frontend-ui/desktop-app/desktop-gui/desktop-gui-design/devops-sre |
-| 1 | 宽泛搜索官方 handbook、GitHub、Google/Bing 结果 | 18 | 45 | 0 | 原分类成立，新增 security、accessibility、observability 作为横切关注点 |
-| 2 | 深挖 frontend/UI、desktop、SRE、production readiness | 17 | 32 | 0 | 发现 Electron/Tauri 权限与安全边界、Core Web Vitals、SLO/error budget 等关键知识簇 |
-| 3 | 技能工程与 broader taxonomy 收敛查询 | 8 | 9 | 0 | 新结果主要是已有主题的命名参考，没有新增一级技能 |
-| 4 | 最后一轮 2026/skills/taxonomy 查询 | 6 | 6 | 0 | 连续两轮新增术语少于 10、无新增分类；达到收敛标准 |
+| 0 | 从 TODO 中建立种子词表 | 约 0 | 约 38 | 8 | 建立初始分类：core/backend/frontend/frontend-ui/desktop-app/desktop-gui/desktop-gui-design/devops-sre |
+| 1 | 宽泛搜索官方 handbook、GitHub、Google/Bing 结果 | 约 18 | 约 45 | 0 | 原分类成立，新增 security、accessibility、observability 作为横切关注点 |
+| 2 | 深挖 frontend/UI、desktop、SRE、production readiness | 约 17 | 约 32 | 0 | 发现 Electron/Tauri 权限与安全边界、Core Web Vitals、SLO/error budget 等关键知识簇 |
+| 3 | 技能工程与 broader taxonomy 收敛查询 | 约 8 | 约 9 | 0 | 新结果主要是已有主题的命名参考，没有新增一级技能 |
+| 4 | 最后一轮 2026/skills/taxonomy 查询 | 约 6 | 约 6 | 0 | 连续两轮新增术语少于 10、无新增分类；达到收敛标准 |
 
 ## 收敛判断
 
-连续第 3、4 轮均满足：
+按人工归纳口径，连续第 3、4 轮均满足：
 
 - 新增有效来源低于第 2 轮的 20%-50% 区间，且大多是已有主题的同义入口。
 - 新增术语少于 10 个。
