@@ -48,3 +48,13 @@
 - 每个技能先写短 `SKILL.md`，必要时增加 `references/`。
 - 先创建 `software-development-core`，因为它会为其他技能提供通用执行框架。
 - 第二批再考虑拆出专项技能：`api-design`、`testing-strategy`、`electron-security`、`sre-incident-response`、`design-system-governance`。
+
+## 第 5 轮补强后的调整
+
+- 安全编码资料足够支撑后续在 `software-development-core` 和 `backend-development` 中加入安全检查项；暂不单独拆 `secure-coding` 技能。
+- 架构文档资料显示 ADR/C4/arc42 应进入 `software-development-core`，作为设计和交接能力。
+- API 设计资料明显增多，`api-design` 可以作为第二批独立技能候选，但第一批先放入 `backend-development`。
+- 可访问性资料应同时进入 `frontend-development` 和 `frontend-ui-design`，前者偏实现，后者偏设计约束。
+- AI 友好代码库资料应进入 `software-development-core`，用于后续技能生成时约束 repository instructions、path-specific instructions 和 AGENTS/Copilot 指令。
+- 设计模式资料按 GoF 23 个经典模式记录；如果后续需要“26 种”，采用“23 个 GoF + Repository/Dependency Injection/Unit of Work 这 3 个工程扩展模式”的明确口径。
+- 大型工程架构资料应进入 `software-development-core` 和 `backend-development`，重点覆盖 architecture styles、DDD/bounded context、hexagonal/ports-adapters、microservices、event-driven、well-architected review。

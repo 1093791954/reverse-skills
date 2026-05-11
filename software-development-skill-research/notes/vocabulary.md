@@ -28,6 +28,51 @@
 - rollback plan
 - feature flag
 - backward compatibility
+- secure by design
+- secure by default
+- architecture decision record / ADR
+- decision log
+- architecturally significant requirement / ASR
+- C4 model
+- system context diagram
+- container diagram
+- component diagram
+- arc42
+- docs-as-code
+- repository instructions
+- path-specific instructions
+- agent instructions
+- copilot-instructions.md
+- GoF / Gang of Four
+- design pattern
+- creational pattern
+- structural pattern
+- behavioral pattern
+- Factory Method
+- Abstract Factory
+- Builder
+- Prototype
+- Singleton
+- Adapter
+- Bridge
+- Composite
+- Decorator
+- Facade
+- Flyweight
+- Proxy
+- Chain of Responsibility
+- Command
+- Iterator
+- Mediator
+- Memento
+- Observer
+- State
+- Strategy
+- Template Method
+- Visitor
+- Repository pattern
+- Dependency Injection
+- Unit of Work
 
 ## 后端
 
@@ -53,6 +98,38 @@
 - readiness probe
 - liveness probe
 - BFF / Backend For Frontend
+- OWASP API Security Top 10
+- BOLA / Broken Object Level Authorization
+- BFLA / Broken Function Level Authorization
+- SSRF / Server-Side Request Forgery
+- ASVS / Application Security Verification Standard
+- secure coding practices
+- OpenAPI Description / OAD
+- securitySchemes
+- Problem Details / Problem JSON
+- resource-oriented design
+- JSON:API
+- contract test
+- consumer-driven contract
+- bounded context
+- ubiquitous language
+- aggregate
+- entity
+- value object
+- domain service
+- domain event
+- microservice boundary
+- N-tier architecture
+- layered architecture
+- microservices architecture
+- event-driven architecture
+- API gateway
+- saga
+- CQRS
+- event sourcing
+- ports and adapters
+- hexagonal architecture
+- well-architected framework
 
 ## 前端工程
 
@@ -78,6 +155,15 @@
 - bundle splitting
 - visual regression
 - end-to-end test
+- WCAG 2.2
+- ARIA Authoring Practices Guide / APG
+- roles / states / properties
+- landmarks
+- accessible name
+- screen reader
+- assistive technology
+- test pyramid
+- testing trophy
 
 ## 前端 UI 设计
 
@@ -102,6 +188,11 @@
 - visual hierarchy
 - dashboard density
 - form ergonomics
+- usability heuristics
+- WCAG success criteria
+- keyboard support
+- focus trap
+- status message
 
 ## 桌面应用
 
@@ -177,6 +268,16 @@
 - capacity planning
 - backup and restore
 - disaster recovery
+- OpenTelemetry / OTel
+- telemetry signal
+- span
+- trace context
+- instrumentation
+- collector
+- metrics/logs/traces
+- safe deployment practices
+- operational excellence
+- runbook automation
 
 ## AI/技能工程补充词
 

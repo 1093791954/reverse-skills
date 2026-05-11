@@ -42,6 +42,41 @@
 | https://github.com/akillness/oh-my-skills | GitHub repo | C | Codex skills | 技能集合、TDD、debugging、architecture、design-system 命名 | GitHub API 未返回 license；只做技能工程参考 |
 | https://www.reddit.com/r/sre/ | 论坛 | C | SRE practice | runbook、postmortem、SLO 实操痛点 | 只作为词表扩展 |
 | https://www.reddit.com/r/Frontend/ | 论坛 | C | frontend/UI | 后端开发者补 UI 能力、design system、user flow | 只作为词表扩展 |
+| https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/ | 官方安全项目 | A | secure coding | 技术无关的安全编码 checklist、软件安全原则、术语 | 适合 backend/frontend/desktop 的安全检查项 |
+| https://owasp.org/API-Security/ | 官方安全项目 | A | API security | OWASP API Security Top 10 2023、授权、业务流保护、SSRF 等 API 风险 | 适合 backend-development |
+| https://owasp.org/www-project-application-security-verification-standard/ | 官方安全标准 | A | application security | Web 应用安全控制验证要求、安全开发需求 | 适合 software-development-core/backend-development |
+| https://www.cisa.gov/securebydesign | 政府安全指导 | A | secure by design | secure by design/default、厂商责任、安全默认值 | 适合 software-development-core/devops-sre-production |
+| https://martinfowler.com/articles/practical-test-pyramid.html | 工程实践文章 | B | testing strategy | 不同粒度自动化测试、测试金字塔、contract test、E2E 权衡 | 适合 software-development-core |
+| https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html | 官方工程博客 | A | testing strategy | Google 测试金字塔、E2E 测试成本与脆弱性 | 适合 software-development-core |
+| https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices | 官方文档 | A | unit testing | 单元测试可读性、脆弱测试、测试设计准则 | 适合 software-development-core |
+| https://adr.github.io/ | ADR 组织站点 | B | architecture decisions | ADR 定义、decision log、architecturally significant requirement | 适合 software-development-core |
+| https://github.com/npryce/adr-tools | GitHub repo | B | ADR tooling | ADR 命令行工具、`doc/architecture/decisions` 目录惯例 | 需检查 license；只作为工具入口 |
+| https://c4model.info/ | 官方模型站点 | B | architecture diagrams | C4 的 Person/System/Container/Component 抽象和四类图 | 适合 software-development-core |
+| https://arc42.org/documentation | 官方模板站点 | B | architecture documentation | 轻量架构文档模板、stakeholder-oriented documentation | 适合 software-development-core |
+| https://opentelemetry.io/docs/ | 官方文档 | A | observability | vendor-neutral telemetry、traces/metrics/logs、instrumentation | 适合 backend-development/devops-sre-production |
+| https://opentelemetry.io/docs/concepts/signals/ | 官方文档 | A | observability signals | OpenTelemetry signals、metrics/logs/traces/events | 适合 backend-development/devops-sre-production |
+| https://prometheus-docs.netlify.app/docs/practices/alerting/ | 官方文档镜像 | B | alerting | alert 规则、用户影响导向告警、监控系统自监控 | 优先查 prometheus.io 原站；镜像只作备份入口 |
+| https://learn.microsoft.com/en-us/azure/well-architected/operational-excellence/ | 官方文档 | A | operational excellence | DevOps culture、observability、automation、safe deployment、incident response | 适合 devops-sre-production |
+| https://learn.openapis.org/specification/ | 官方学习文档 | A | OpenAPI | OpenAPI Description、paths/responses/securitySchemes/components/examples | 适合 backend-development |
+| https://google.aip.dev/ | 官方 API 指南 | A | API design | Google AIP、resource-oriented API design、API rule governance | 适合 backend-development |
+| https://opensource.zalando.com/restful-api-guidelines/ | 工程团队指南 | B | API design | RESTful API/event guidelines、一致性、Problem JSON、rate limits | CC-BY 4.0；引用需署名 |
+| https://jsonapi.org/format/index.html | 规范站点 | B | API format | JSON:API 1.1、资源请求/响应、扩展和 profile | 适合 backend-development |
+| https://www.w3.org/TR/WCAG22/ | W3C 标准 | A | accessibility | WCAG 2.2 成功标准、可访问性合规基线 | 适合 frontend-development/frontend-ui-design |
+| https://www.w3.org/WAI/ARIA/apg/ | W3C 指南 | A | accessible widgets | ARIA design patterns、keyboard support、roles/states/properties | 适合 frontend-development/frontend-ui-design |
+| https://www.gov.uk/service-manual/technology/accessibility-for-developers-an-introduction | 政府服务手册 | A | frontend accessibility | GOV.UK Design System、WCAG 2.2 AA、辅助技术测试 | 适合 frontend-development/frontend-ui-design |
+| https://docs.github.com/en/copilot/concepts/about-customizing-github-copilot-chat-responses | 官方文档 | A | AI coding instructions | repository/path-specific/agent instructions、短自包含规则、优先级 | 适合 software-development-core/技能工程 |
+| https://refactoring.guru/design-patterns/catalog | 设计模式目录 | B | GoF design patterns | GoF 23 个经典模式，按 creational/structural/behavioral 分类 | 可总结模式意图，不复制长篇内容 |
+| https://sourcemaking.com/design_patterns | 设计模式目录 | B | design patterns | 设计模式、refactoring、UML 入口 | 可作为辅助入口 |
+| https://learn.microsoft.com/en-us/azure/architecture/patterns/ | 官方架构中心 | A | cloud design patterns | 云设计模式、问题/权衡/示例结构 | 适合 backend/devops/architecture |
+| https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ | 官方架构中心 | A | architecture styles | N-tier、microservices、event-driven 等架构风格选择 | 适合 software-development-core/backend |
+| https://learn.microsoft.com/en-us/azure/architecture/microservices/ | 官方架构中心 | A | microservices | bounded context、数据自治、API gateway、observability、DevOps | 适合 backend-development |
+| https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven | 官方架构中心 | A | event-driven architecture | producer/consumer/channel、pub-sub、eventual consistency、调试/监控挑战 | 适合 backend/devops |
+| https://learn.microsoft.com/en-us/azure/architecture/microservices/model/domain-analysis | 官方架构中心 | A | DDD domain analysis | bounded context、ubiquitous language、domain concern、microservice 切分 | 适合 backend-development |
+| https://learn.microsoft.com/en-us/azure/architecture/microservices/model/microservice-boundaries | 官方架构中心 | A | microservice boundaries | bounded context、aggregate/entity/domain service、迭代式边界识别 | 适合 backend-development |
+| https://alistair.cockburn.us/hexagonal-architecture | 原始架构文章 | B | hexagonal architecture | ports and adapters、核心应用与外部设备隔离、可测试性 | Web 搜索可访问，PowerShell 检查失败；保留为原始出处 |
+| https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html | 官方架构指导 | A | hexagonal architecture | AWS 对 ports/adapters、domain、ports、adapters、依赖反转的解释 | 稳定补充来源 |
+| https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html | 官方架构框架 | A | well-architected | AWS 六大支柱：operational excellence/security/reliability/performance/cost/sustainability | 适合 devops-sre-production |
+| https://cloud.google.com/architecture/framework | 官方架构框架 | A | well-architected | Google Cloud Well-Architected Framework、可靠性、可扩展性、解耦 | 适合 devops-sre-production |
 
 ## 排除规则
 
