@@ -338,6 +338,56 @@ client 真实 system: "<protocol-directive: emit tool_call fence ...>"
 | `atxp.chat` | 注册机 100% 工作，rate-limit 阻断 | "$5 free credit" 实测**只对干净 IP + 干净邮箱**生效；本地中国 IP + `.xyz` 邮箱 → `fraud_blocked`；干净 VPS + `outlook.com` → 拿到 `$6 credit`，但 `chat.atxp.ai` 429 限速 |
 | `chatgpt.org` | ✅ **唯一完美** | 不登录可用、不 wrap system、OpenRouter 透传到 Bedrock 真出 token、流式 SSE 标准、白名单 8 个模型（含 Claude Haiku 4.5、GPT-4o-mini、Gemini Flash、Grok、DeepSeek、Qwen、Moonlight、Perplexity）|
 
+## 10. 阿里云 DAS 设备指纹反作弊（2026-05-12 新增，致命）
+
+特征：站点注册页用阿里云验证码 2.0 (`captcha-open.aliyuncs.com`)，但**真正的反作弊在 `cloudauth-device-dualstack.cn-shanghai.aliyuncs.com`**（DAS = Device Anti-Spoofing）。
+
+SDK 加载时静默调用 DAS：
+- `POST cloudauth-device-dualstack.cn-shanghai.aliyuncs.com/  Action=Log1`
+- `POST cloudauth-device-dualstack.cn-shanghai.aliyuncs.com/  Action=Log2`
+- `POST cloudauth-device-dualstack.cn-shanghai.aliyuncs.com/  Action=Log3`
+
+收集 40+ 维度浏览器指纹 → 加密成 `deviceToken` (2KB+ base64) → 内嵌进 `captchaVerifyParam` 提交。即使滑块前端 SDK 认 "Sliding completed"，后端解开 deviceToken 一看是自动化 → 返回 **"Sig Validate Error"**。
+
+**实例**：
+
+| 站点 | 后端 | 实测 |
+|---|---|---|
+| `notegpt.io` 注册页 | Aliyun DAS | 试了 9 个版本（playwright/patchright/Camoufox/pyautogui 物理鼠标/CDP attach 真 Edge/真用户 profile/Google warmup/极慢轨迹），全部 "Sig Validate Error"。用户手动浏览器一次过。|
+
+**已无效的"破解"手段**：
+- ✗ playwright + stealth init script
+- ✗ playwright-stealth 2.0.2（标准库）
+- ✗ patchright (compiled-level patched playwright)
+- ✗ Camoufox (Firefox-based deep fingerprint spoofer)
+- ✗ Bezier curve mouse paths + jitter + overshoot
+- ✗ pyautogui 物理 OS 鼠标驱动（最深层）
+- ✗ CDP attach 到真 Edge 浏览器
+- ✗ 持久化 user data dir + Google 浏览预热
+- ✗ 真用户主 Edge profile（非 InPrivate）
+- ✗ 极慢操作（每步等 3-8s）
+- ✗ GPT-5.5 视觉模型校准 + slot-by-slot 精确坐标
+
+**唯一 work 的**：**人手动操作真浏览器**。
+
+**应对**：
+
+1. **不要在带 Aliyun DAS 的站点上做注册机** — ROI 极差
+2. 采用**半自动**：人手注册 + 脚本 `import_cookie.py` 入账号池
+3. NoteGPT 的反代部分 (`/api/v2/chat/stream`) 完全 work，只是注册环节卡死
+
+**检测 DAS 的方法**：
+
+```python
+# 在浏览器 DevTools Network 标签观察注册页加载后的 outbound POST
+# 出现 cloudauth-device-dualstack.cn-shanghai.aliyuncs.com → 这是阿里 DAS
+# 出现 captcha-open.aliyuncs.com 但没有 cloudauth-device-dualstack → 普通阿里盾（可能可破）
+```
+
+**辅助证据**：codex 2026-05 web 调研结论：**没有公开的 2025-2026 Aliyun captcha solver**。CapSolver/2Captcha/AntiCaptcha 都不支持。GitHub 上历史项目全部停维护。
+
+> §10 是最痛的教训。下次看到 `cloudauth-device-dualstack` 直接 archive 注册机部分，只走半自动路径。
+
 ## 一句话总结
 
 **16 个候选 → 1 个完美（chatgpt.org）+ 1 个部分（deepai） + 14 个 archive ≈ 6% 命中率**。

@@ -62,6 +62,60 @@
 
 > "⚠️ 据说" 全部是社区博客或论坛传言，**未在任何 scene 上实测**。引用这表格做决策前**必须**先在选定服务的免费 `getBalance` + 空 task 上验证。
 
+## 大模型视觉 API 作为打码替代（2026-05-12 新增）
+
+不是打码服务，但能干很多打码服务能干的事：让 GPT-5.5 / Claude Vision / Gemini Pro Vision 看截图返回元素坐标。**比 OpenCV 模板匹配灵活百倍**，比专业打码服务便宜（API 按 token 计费）。
+
+### 实测可用：otokapi.com 转发 GPT-5.5
+
+```python
+import base64, json, urllib.request
+with open('screenshot.png', 'rb') as f:
+    img_b64 = base64.b64encode(f.read()).decode()
+body = {
+    "model": "gpt-5.5",
+    "messages": [{"role": "user", "content": [
+        {"type": "text", "text": "<your prompt>"},
+        {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}},
+    ]}],
+    "max_tokens": 500,
+}
+req = urllib.request.Request(
+    "https://otokapi.com/v1/chat/completions",
+    data=json.dumps(body).encode(),
+    headers={"Content-Type": "application/json",
+             "Authorization": "Bearer sk-<key>"},
+)
+with urllib.request.urlopen(req, timeout=90) as r:
+    print(json.loads(r.read().decode())["choices"][0]["message"]["content"])
+```
+
+### 适用场景
+
+✅ 找页面元素坐标（输入框/按钮/滑块/链接）
+✅ 检测当前页面状态（错误/成功/loading）
+✅ 提取图片中的文本（OCR 替代）
+✅ 验证脚本步骤之间页面 transition 是否对
+❌ 解阿里盾滑块（视觉看不出滑动 trajectory）
+❌ 解 reCAPTCHA / Turnstile（这些专业打码服务也搞不定）
+
+### 成本估算（2026-05-12 实测）
+
+- 1280x860 截图 → ~1500-2000 prompt tokens
+- 简单坐标返回 → ~50-200 completion tokens
+- 单次调用约 2K total tokens
+
+对 GPT-5.5 价格按 OpenAI 标准（输入 ~$5/1M、输出 ~$50/1M），单次 ~$0.015。
+**100 次校准 = $1.5**。比 CapSolver $6 实测不能用便宜。
+
+### 例子：NoteGPT 注册机用 GPT-5.5 vision 校准
+
+代码见 `D:\tmp\FreeAI\notegpt.io\scripts\register_one_v7.py`。每次启动 Edge 后截图 → GPT-5.5 返回 email/password/slider/submit 屏幕绝对坐标 → pyautogui 物理点击。
+
+**坐标精度**：GPT-5.5 可在 ±5 像素内给出元素中心，已 enough for click。
+
+**未解决的问题**：即使坐标完美，阿里 DAS 仍拒。视觉校准不解决指纹反作弊问题。
+
 ## 推荐的免费验证脚本模板
 
 ```python
