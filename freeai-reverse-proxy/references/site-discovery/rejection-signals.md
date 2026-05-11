@@ -233,6 +233,30 @@ client 真实 system: "<protocol-directive: emit tool_call fence ...>"
 | 站点 | title 标榜 | 实测后端 | 揭穿 |
 |---|---|---|---|
 | `aiclaude.jp` | "Claude(クロード) 日本語無料版" | **GPT-4 / OpenAI** | 直接问"What is your model" → `{"model_name":"GPT-4"}` |
+| `toolbaz.com` | UI selector 列 Claude-Sonnet-4 + GPT-5 + Gemini-2.5-Pro + 24 models | **MiniMax-M2.1**（不管选哪个）| 选 claude-sonnet-4 后问 → `{"model_name":"MiniMax-M2.1"}` |
+
+### 8.1 诱导式 model selector（**比 8.0 更狡猾**）
+
+特征：
+- UI 提供 `<select>` 让用户选 10-30+ 个模型名（包含 Claude/GPT-5/Gemini）
+- **但**所有选项都路由到**同一个便宜后端**（MiniMax、DeepSeek、Llama、Qwen 等）
+- model 字段在请求 body 里被服务端**忽略或重写**
+
+检测方法：
+
+```
+1. 选 selector 中的 Claude/Opus 选项
+2. 问 "What is your exact model name? Reply JSON."
+3. 选 selector 中的 GPT-5 选项
+4. 再问同样问题
+5. 如果两次回答都是同一个第三方模型（如 MiniMax）→ 确认诱导式 selector
+```
+
+实例：toolbaz.com（任何 model selector 选项都返回 `{"model_name":"MiniMax-M2.1"}`）
+
+应对：archive。**比纯诱导标题更难发现**——因为站点煞有介事提供 selector + 切换确实在 DOM 层面工作，但底层路由根本不变。
+
+---
 
 应对：archive（如果项目目标是 Claude）。如果项目目标灵活，仍可作为 GPT 反代候选 — 看 aiclaude.jp 案例（完美 GPT 反代基础设施）。
 
