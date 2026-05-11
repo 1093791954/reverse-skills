@@ -1,0 +1,27 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "freeai/claude-haiku-4-5",
+  "enabled_providers": ["freeai"],
+  "mcp": {},
+  "permission": "allow",
+  "provider": {
+    "freeai": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "FreeAI Reverse Proxy (set baseURL + apiKey from deploy.py output)",
+      "options": {
+        "apiKey": "REPLACE_WITH_BEARER_TOKEN_OR_not-needed",
+        "baseURL": "http://127.0.0.1:8888/v1"
+      },
+      "models": {
+        "claude-haiku-4-5":  { "name": "Claude Haiku 4.5 (chatgpt.org)" },
+        "gpt-4o-mini":       { "name": "GPT-4o mini (chatgpt.org)" },
+        "gemini-2.0-flash":  { "name": "Gemini 2.0 Flash (chatgpt.org)" },
+        "deepseek-v3":       { "name": "DeepSeek V3 (chatgpt.org)" },
+        "qwen-2.5-72b":      { "name": "Qwen 2.5 72B (chatgpt.org)" },
+        "grok-3-mini-beta":  { "name": "Grok 3 mini beta (chatgpt.org)" },
+        "moonlight-16k":     { "name": "Moonshot Moonlight 16K (chatgpt.org)" },
+        "perplexity-sonar":  { "name": "Perplexity Sonar (chatgpt.org)" }
+      }
+    }
+  }
+}

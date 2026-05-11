@@ -19,6 +19,7 @@ QQ群：`1005370499`
 | `packed-sample-analysis` | 合法授权场景下的加壳样本与保护二进制分析流程，重点是静态初筛、运行观察、Dump 校验和安全报告边界。 |
 | `vmp-unpack-analysis` | 合法授权场景下的 VMP/VMProtect 保护样本分析流程，覆盖保护分类、OEP/Dump 校验、VM 边界识别、handler/状态建模和报告交付。 |
 | `riskcontrol-analysis` | 合法授权场景下的移动 App / iOS / Web / H5 / 小程序 / PC 浏览器风控、反爬、设备指纹、加密参数还原与人机验证对抗的通用工作流（覆盖字节/阿里/美团/京东/拼多多/B站/快手/知乎/网易云/小红书/微信 mmtls/QQ wtlogin 等大站参数 + Akamai/CF/PX/DataDome/Kasada/Imperva/瑞数/极验/网易盾/数美/顶象/同盾 等反爬厂商 + JA3/JA4/Canvas/WebGL 指纹 + Frida/Magisk/unidbg/OLLVM/SSL Pinning 工具链 + Play Integrity/TEE Key Attestation/AVB/PAC/SEP）。 |
+| `freeai-reverse-proxy` | 合法授权场景下把免费 LLM 聊天网站（chatgpt.org、overchat.ai、duck.ai、freellmplayground.com、miniapps.ai、chataibot.pro、essaydone.ai、rita.ai、hix.ai、unitool.ai、mindstudio.ai、iweaver.ai、atxp.chat、tasklet.ai 等）包装成 OpenAI 兼容反向代理的工作流。覆盖站点发现与 5 分钟硬性筛选、4 类拒绝信号（reCAPTCHA / 付费墙 / IP 信誉 / B2B agent wrap）、上游 SSE 协议逆向、tool_call fence 协议合成、OpenAI tool_calls 流式 wire-format（HEADER + ARG-DELTA + usage chunk）、tool_choice 升级（auto/required/required-strong）、AccountPool + SOCKS5 代理池（多源聚合 ~15k 候选 / 7% 命中 / LRU 持久化）、prompt-prefix SQLite WAL 缓存、9 件套稳定性修复（retry-on-no-tool-use、wall-clock deadline、SOCKS catch-all、max_retries=10）、paramiko + scp + systemd 远程部署、Bearer token 鉴权、OpenCode 配置（enabled_providers + provider 模型表）。 |
 | `jshook-skill` | JavaScript 逆向自动化工具技能，以 submodule 方式引用独立仓库。 |
 | `reverse-skill` | Web JS 逆向分析技能集合，以 submodule 方式引用独立仓库。 |
 
