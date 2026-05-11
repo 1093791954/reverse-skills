@@ -1,0 +1,4 @@
+interface:
+  display_name: "China Official Documents"
+  short_description: "Chinese official document drafting and formatting"
+  default_prompt: "Use $china-official-documents to draft and format a mainland China official document."
