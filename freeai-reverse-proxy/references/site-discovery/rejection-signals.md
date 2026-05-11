@@ -54,36 +54,7 @@
 
 应对：上 SOCKS5 池可解，但配额低，要做 account-pool 轮换。
 
-## 6. "User-Pays" 模型陷阱（2026-05-11 新增）
-
-特征：站点宣传 **"Free Unlimited AI API — No API key, no signup, no server"**，但实际是 **"由你的网站访客出钱"**（User-Pays / Bring-Your-Own-User）：
-- dev 在自家网站嵌入站点 SDK（如 `<script src="https://js.xyz.com/v2/"></script>`）
-- 当**终端用户**首次触发 AI 调用时，SDK 弹出第三方账号 OAuth 登录窗口
-- 登录后 SDK 拿到该用户的 `authToken`，用该用户的配额（kWh 或 token）扣费
-- 对 dev 而言是免费，对终端用户而言是付费/有配额上限
-
-实例：
-
-| 站点 | 触发表现 | 揭穿点 |
-|---|---|---|
-| `puter.com` (puter.js) | README "Free, Unlimited Claude Opus 4.7" + "No API keys or sign-ups required" | SDK 内 `puter.ui.authenticateWithPuter()` 自动弹 OAuth；`/get-gui-token` 匿名 401；注册路径有 Turnstile |
-
-**检测信号（5 分钟内可判定）**：
-
-1. SDK 源码 grep `signIn` / `authenticate` / `bearer` / `oauth` / `popup` 全部命中
-2. 演示页面打开后控制台报 `401 Unauthorized` 在 `/whoami` / `/get-gui-token` / `/lsmod` 这类调用
-3. README 反复强调 "无 API key" 但**绝口不提"终端用户登录"**
-
-应对：
-
-- **如果你的目标是反代后端**（让 OpenCode/Codex 跑工具循环）→ **archive**。SDK 弹窗终端用户登录、单账号配额、注册需破 Turnstile，代价远超收益。
-- 如果你的目标是给前端项目嵌 SDK 给真实用户用 → 这是 OK 的（用户掏自己钱）。
-
-> User-Pays 不是 4 类拒绝信号的子项，单独立第 6 类，因为它包装得像"完美匿名 API"，特别容易上当。
-
-## 灰区案例
-
-## 4. B2B / Agent wrap（最致命）
+## 4. B2B / Agent wrap（**已拆 3 子类**）
 
 特征：
 - 站点定位是"prompt 模板平台"/"agent workflow runner"，**不暴露 raw chat 接口**。
@@ -179,9 +150,74 @@ client 真实 system: "<protocol-directive: emit tool_call fence ...>"
 | `yupp.ai` | title="Legacy \| Yupp"、"June 2024 — April 2026 Yupp **provided** free access" | 1M+ users / 90K Discord / 200 countries / 900+ AI models 全是回顾数据，没有 chat 接口 |
 | `yupp.dev` | 整域名 ERR_TIMED_OUT | yupp 的开发者域名一同下线 |
 
-应对：**永久 archive，不重试**。"曾经存在但 sunset"是不可逆信号。
+应对：**永久 archive，不重试**。
 
 > 检测可以做到非常早：访问首页前 **先看 HTML title + body 第一屏文字**，含 "Legacy/Sunset/Story/2024 — 2026" 关键词 + 没有 textarea = 直接 archive，30 秒就能判断。
+
+## 6. "User-Pays" 模型陷阱（2026-05-11 新增）
+
+特征：站点宣传 **"Free Unlimited AI API — No API key, no signup, no server"**，但实际是 **"由你的网站访客出钱"**（User-Pays / Bring-Your-Own-User）：
+- dev 在自家网站嵌入站点 SDK（如 `<script src="https://js.xyz.com/v2/"></script>`）
+- 当**终端用户**首次触发 AI 调用时，SDK 弹出第三方账号 OAuth 登录窗口
+- 登录后 SDK 拿到该用户的 `authToken`，用该用户的配额（kWh 或 token）扣费
+- 对 dev 而言是免费，对终端用户而言是付费/有配额上限
+
+实例：
+
+| 站点 | 触发表现 | 揭穿点 |
+|---|---|---|
+| `puter.com` (puter.js) | README "Free, Unlimited Claude Opus 4.7" + "No API keys or sign-ups required" | SDK 内 `puter.ui.authenticateWithPuter()` 自动弹 OAuth；`/get-gui-token` 匿名 401；注册路径有 Turnstile |
+
+**检测信号（5 分钟内可判定）**：
+
+1. SDK 源码 grep `signIn` / `authenticate` / `bearer` / `oauth` / `popup` 全部命中
+2. 演示页面打开后控制台报 `401 Unauthorized` 在 `/whoami` / `/get-gui-token` / `/lsmod` 这类调用
+3. README 反复强调 "无 API key" 但**绝口不提"终端用户登录"**
+
+应对：
+
+- **如果你的目标是反代后端**（让 OpenCode/Codex 跑工具循环）→ **archive**。SDK 弹窗终端用户登录、单账号配额、注册需破 Turnstile，代价远超收益。
+- 如果你的目标是给前端项目嵌 SDK 给真实用户用 → 这是 OK 的（用户掏自己钱）。
+
+> User-Pays 不是 4 类拒绝信号的子项，单独立第 6 类，因为它包装得像"完美匿名 API"，特别容易上当。
+
+## 7. Freemium 月配额（**不是拒绝信号 — 是注册机机会**，2026-05-11 新增）
+
+特征：
+- 站点接受邮箱注册（不强 Google OAuth）
+- 注册门槛低：阿里盾基础滑块、邮箱激活、或仅邮箱+密码
+- 单账号有明确的月配额（如 "15 quotas/month"、"100 messages/month"）
+- 模型清单含 Opus 4.6/4.7 等顶级模型（这是优点）
+
+实例：
+
+| 站点 | 配额 | 模型清单亮点 | 注册门槛 |
+|---|---|---|---|
+| `notegpt.io` | **15 次/月/账号** | **Claude Opus 4.7** 官方支持 + GPT-5/Gemini 3.1 Pro 等 | Email + Password + **阿里盾基础滑块**（不是 Enterprise）|
+
+**应对（重要）**：
+
+不要 archive！这是**注册机 + 账号池**的机会：
+
+- 100 个账号 = 1500 次/月，~50 次/天 → 反代后端可用
+- 阿里盾基础滑块（不是 Enterprise）相对好破：
+  - OCR 计算滑块缺口位置（85-95% 准确率）
+  - 模拟人类拖动轨迹（带加速曲线、抖动、回弹）
+  - 单机 5-10 秒过一次
+- 邮箱：Catch-all 域名邮箱 + 自托管 IMAP 接收激活码
+
+**判定标准**（**5 分钟内**）：
+
+1. 注册路径含 reCAPTCHA Enterprise / Cloudflare Turnstile / hCaptcha → archive（破不掉）
+2. 阿里盾 / 腾讯防水墙 / GeeTest / 网易盾基础滑块 → **可注册机**
+3. 必须电话号验证 → archive（无法批量化）
+4. 邮箱激活 + 滑块 → **可注册机**（多写一个 IMAP 接收脚本）
+
+**关键洞察**：站点宣传"15 次/月免费"看似抠门，但**对反代**反而是好事 —— 配额低意味着站点没用反 abuse / IP 风控来减损，注册机成本低。
+
+> 第 7 类是"机会信号"不是"拒绝信号"，但放在这里给从 captcha/付费墙惯性思维切换到"注册机"思路的提醒。
+
+> **重要诚实提醒（待实战验证）**：上述"100 账号 → 1500 次/月"、"阿里盾基础滑块 85-95% 准确率"、"单机 5-10 秒过一次"等数字都是基于其他项目的经验值估算，**未在 NoteGPT 上实测**。开始注册机前应先单账号注册成功一次、看是否有邮箱激活 / 设备指纹封禁等额外门槛，再放量。
 
 ## 灰区案例
 
