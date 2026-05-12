@@ -4,3 +4,6 @@
 [submodule "reverse-skill"]
 	path = reverse-skill
 	url = https://github.com/715494637/reverse-skill.git
+[submodule "ctf-super-hub"]
+	path = ctf-super-hub
+	url = https://github.com/asdfgh1445/ctf-super-hub.git
