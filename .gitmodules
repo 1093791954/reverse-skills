@@ -10,3 +10,39 @@
 [submodule "webcrack"]
 	path = webcrack
 	url = https://github.com/j4k0xb/webcrack.git
+[submodule "geetest-crack"]
+	path = geetest-crack
+	url = https://github.com/yanglbme/geetest-crack.git
+[submodule "Flytutu-SliderCracker"]
+	path = Flytutu-SliderCracker
+	url = https://github.com/Flytutu/SliderCracker.git
+[submodule "spider-js-reverse"]
+	path = spider-js-reverse
+	url = https://github.com/Annyfee/spider-js-reverse.git
+[submodule "vmp_demo"]
+	path = vmp_demo
+	url = https://github.com/buluo533/vmp_demo.git
+[submodule "facelessJsvmp"]
+	path = facelessJsvmp
+	url = https://github.com/Alanhays/facelessJsvmp.git
+[submodule "jsvmp-repository"]
+	path = jsvmp-repository
+	url = https://github.com/xiaoweigege/jsvmp-repository.git
+[submodule "jshook-reverse-tool"]
+	path = jshook-reverse-tool
+	url = https://github.com/wuji66dde/jshook-reverse-tool.git
+[submodule "ast-hook-for-js-RE"]
+	path = ast-hook-for-js-RE
+	url = https://github.com/JSREI/ast-hook-for-js-RE.git
+[submodule "v_jstools"]
+	path = v_jstools
+	url = https://github.com/cilame/v_jstools.git
+[submodule "who0sy-SliderCracker"]
+	path = who0sy-SliderCracker
+	url = https://github.com/who0sy/SliderCracker.git
+[submodule "SliderCracker-1"]
+	path = SliderCracker-1
+	url = https://github.com/just45/SliderCracker-1.git
+[submodule "gt-geetest"]
+	path = gt-geetest
+	url = https://github.com/gtsigner/gt-geetest.git
