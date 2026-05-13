@@ -7,3 +7,6 @@
 [submodule "ctf-super-hub"]
 	path = ctf-super-hub
 	url = https://github.com/asdfgh1445/ctf-super-hub.git
+[submodule "webcrack"]
+	path = webcrack
+	url = https://github.com/j4k0xb/webcrack.git
