@@ -46,3 +46,36 @@
 [submodule "gt-geetest"]
 	path = gt-geetest
 	url = https://github.com/gtsigner/gt-geetest.git
+[submodule "RE-UE4SS"]
+	path = RE-UE4SS
+	url = https://github.com/UE4SS-RE/RE-UE4SS.git
+[submodule "Dumper-7"]
+	path = Dumper-7
+	url = https://github.com/Encryqed/Dumper-7.git
+[submodule "UE-Dumper"]
+	path = UE-Dumper
+	url = https://github.com/McDaived/UE-Dumper.git
+[submodule "UEDumperDMA"]
+	path = UEDumperDMA
+	url = https://github.com/dvGrab/UEDumperDMA.git
+[submodule "CUE4Parse"]
+	path = CUE4Parse
+	url = https://github.com/FabianFG/CUE4Parse.git
+[submodule "LIEF"]
+	path = LIEF
+	url = https://github.com/lief-project/LIEF.git
+[submodule "capa"]
+	path = capa
+	url = https://github.com/mandiant/capa.git
+[submodule "ImHex"]
+	path = ImHex
+	url = https://github.com/WerWolv/ImHex.git
+[submodule "x64dbg"]
+	path = x64dbg
+	url = https://github.com/x64dbg/x64dbg.git
+[submodule "UeBlueprintDumper"]
+	path = UeBlueprintDumper
+	url = https://github.com/CrystalFerrai/UeBlueprintDumper.git
+[submodule "UEDumper"]
+	path = UEDumper
+	url = https://github.com/Spuckwaffel/UEDumper.git
