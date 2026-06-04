@@ -1,8 +1,8 @@
 [submodule "jshook-skill"]
-	path = jshook-skill
+	path = cybersecurity-skill-hub/jshook-skill
 	url = https://github.com/wuji66dde/jshook-skill.git
 [submodule "reverse-skill"]
-	path = reverse-skill
+	path = cybersecurity-skill-hub/reverse-skill
 	url = https://github.com/715494637/reverse-skill.git
 [submodule "ctf-super-hub"]
 	path = ctf-super-hub

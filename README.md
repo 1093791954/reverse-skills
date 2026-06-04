@@ -10,40 +10,59 @@ QQ群：`1005370499`
 
 这是一个 Codex 技能仓库，用来沉淀逆向工程研究相关的工作流、参考资料和任务入口。
 
-## 技能列表
+当前目录已经按主题做了第一轮归类，避免技能目录散落在仓库根目录。
+
+## 分类目录
+
+| 分类目录 | 说明 |
+| --- | --- |
+| `cybersecurity-skill-hub/` | 网络安全、逆向、风控、样本分析、Web 参数还原等技能。 |
+| `development-skill-hub/` | 后端、DevOps、通用软件开发等工程技能。 |
+| `ui-desktop-skill-hub/` | 前端、桌面应用、GUI 设计与开发相关技能。 |
+| `research-skill-hub/` | 资料检索、政策文档等研究辅助技能。 |
+
+根目录当前主要保留两类内容：
+
+- 安全研究工具或外部仓库，例如 `x64dbg`、`ImHex`、`capa`、`webcrack`
+- 仓库配置与辅助目录，例如 `.claude`、`.playwright-mcp`
+
+## 网络安全技能
 
 | 技能 | 用途 |
 | --- | --- |
-| `imgui-reverse` | 面向 Windows 游戏逆向覆盖层的 Dear ImGui 工作流，包含外部窗口、DX11 Hook 渲染、消息转发、字体中文支持和常用控件。 |
-| `ue-reverse` | Unreal Engine 逆向工作流，覆盖源码环境准备、`GName` / `FName`、`UObject`、`FUObjectArray`、`UWorld`、Actor 遍历、世界坐标转屏幕坐标、骨骼绘制、IoStore 和反射元数据。 |
-| `packed-sample-analysis` | 合法授权场景下的加壳样本与保护二进制分析流程，重点是静态初筛、运行观察、Dump 校验和安全报告边界。 |
-| `vmp-unpack-analysis` | 合法授权场景下的 VMP/VMProtect 保护样本分析流程，覆盖保护分类、OEP/Dump 校验、VM 边界识别、handler/状态建模和报告交付。 |
-| `riskcontrol-analysis` | 合法授权场景下的移动 App / iOS / Web / H5 / 小程序 / PC 浏览器风控、反爬、设备指纹、加密参数还原与人机验证对抗的通用工作流（覆盖字节/阿里/美团/京东/拼多多/B站/快手/知乎/网易云/小红书/微信 mmtls/QQ wtlogin 等大站参数 + Akamai/CF/PX/DataDome/Kasada/Imperva/瑞数/极验/网易盾/数美/顶象/同盾 等反爬厂商 + JA3/JA4/Canvas/WebGL 指纹 + Frida/Magisk/unidbg/OLLVM/SSL Pinning 工具链 + Play Integrity/TEE Key Attestation/AVB/PAC/SEP）。 |
-| `freeai-reverse-proxy` | 合法授权场景下把免费 LLM 聊天网站（chatgpt.org、overchat.ai、duck.ai、freellmplayground.com、miniapps.ai、chataibot.pro、essaydone.ai、rita.ai、hix.ai、unitool.ai、mindstudio.ai、iweaver.ai、atxp.chat、tasklet.ai 等）包装成 OpenAI 兼容反向代理的工作流。覆盖站点发现与 5 分钟硬性筛选、4 类拒绝信号（reCAPTCHA / 付费墙 / IP 信誉 / B2B agent wrap）、上游 SSE 协议逆向、tool_call fence 协议合成、OpenAI tool_calls 流式 wire-format（HEADER + ARG-DELTA + usage chunk）、tool_choice 升级（auto/required/required-strong）、AccountPool + SOCKS5 代理池（多源聚合 ~15k 候选 / 7% 命中 / LRU 持久化）、prompt-prefix SQLite WAL 缓存、9 件套稳定性修复（retry-on-no-tool-use、wall-clock deadline、SOCKS catch-all、max_retries=10）、paramiko + scp + systemd 远程部署、Bearer token 鉴权、OpenCode 配置（enabled_providers + provider 模型表）。 |
-| `jshook-skill` | JavaScript 逆向自动化工具技能，以 submodule 方式引用独立仓库。 |
-| `reverse-skill` | Web JS 逆向分析技能集合，以 submodule 方式引用独立仓库。 |
+| `cybersecurity-skill-hub/imgui-reverse` | 面向 Windows 游戏逆向覆盖层的 Dear ImGui 工作流，包含外部窗口、DX11 Hook 渲染、消息转发、字体中文支持和常用控件。 |
+| `cybersecurity-skill-hub/ue-reverse` | Unreal Engine 逆向工作流，覆盖源码环境准备、`GName` / `FName`、`UObject`、`FUObjectArray`、`UWorld`、Actor 遍历、世界坐标转屏幕坐标、骨骼绘制、IoStore 和反射元数据。 |
+| `cybersecurity-skill-hub/packed-sample-analysis` | 合法授权场景下的加壳样本与保护二进制分析流程，重点是静态初筛、运行观察、Dump 校验和安全报告边界。 |
+| `cybersecurity-skill-hub/vmp-unpack-analysis` | 合法授权场景下的 VMP/VMProtect 保护样本分析流程，覆盖保护分类、OEP/Dump 校验、VM 边界识别、handler/状态建模和报告交付。 |
+| `cybersecurity-skill-hub/riskcontrol-analysis` | 合法授权场景下的移动 App / iOS / Web / H5 / 小程序 / PC 浏览器风控、反爬、设备指纹、加密参数还原与人机验证对抗的通用工作流。 |
+| `cybersecurity-skill-hub/captcha-bypass-analysis` | 验证码类型、厂商、自动化、轨迹、指纹绕过等分析工作流。 |
+| `cybersecurity-skill-hub/freeai-reverse-proxy` | 合法授权场景下把免费 LLM 聊天网站包装成 OpenAI 兼容反向代理的工作流。 |
+| `cybersecurity-skill-hub/jshook-skill` | JavaScript 逆向自动化工具技能，以 submodule 方式引用独立仓库。 |
+| `cybersecurity-skill-hub/reverse-skill` | Web JS 逆向分析技能集合，以 submodule 方式引用独立仓库。 |
 
 ## 目录结构
 
 ```text
 .
-├── imgui-reverse/
-│   ├── SKILL.md
-│   ├── agents/
-│   └── references/
-├── packed-sample-analysis/
-│   ├── SKILL.md
-│   └── references/
-├── ue-reverse/
-    ├── SKILL.md
-    ├── agents/
-    └── references/
-├── vmp-unpack-analysis/
-│   ├── SKILL.md
-│   ├── agents/
-│   └── references/
-├── jshook-skill/          # submodule
-└── reverse-skill/         # submodule
+├── cybersecurity-skill-hub/
+│   ├── captcha-bypass-analysis/
+│   ├── imgui-reverse/
+│   ├── jshook-skill/      # submodule
+│   ├── reverse-skill/     # submodule
+│   ├── riskcontrol-analysis/
+│   ├── ue-reverse/
+│   └── vmp-unpack-analysis/
+├── development-skill-hub/
+│   ├── backend-development/
+│   ├── devops-sre-production/
+│   └── software-development-core/
+├── ui-desktop-skill-hub/
+│   ├── frontend-development/
+│   ├── frontend-ui-design/
+│   └── desktop-gui-development/
+├── research-skill-hub/
+│   └── china-official-documents/
+└── x64dbg/                # tool repository
 ```
 
 ## 使用方式
